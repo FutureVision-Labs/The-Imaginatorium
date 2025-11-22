@@ -1,0 +1,252 @@
+/* Documentation Page Styles */
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-logo {
+    color: var(--primary-cyan);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 800;
+    transition: color 0.3s ease;
+}
+
+.header-logo:hover {
+    color: var(--primary-purple);
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: rgba(26, 26, 46, 0.5);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.breadcrumbs .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.breadcrumbs a {
+    color: var(--primary-cyan);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+    color: var(--primary-purple);
+}
+
+.breadcrumb-separator {
+    color: var(--muted-text);
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-current {
+    color: var(--light-text);
+    font-weight: 500;
+}
+
+/* Documentation Content */
+.doc-content {
+    padding: 3rem 0;
+    min-height: calc(100vh - 300px);
+}
+
+.markdown-content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.markdown-content h1 {
+    color: var(--primary-cyan);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--primary-cyan);
+}
+
+.markdown-content h2 {
+    color: var(--primary-purple);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--card-border);
+}
+
+.markdown-content h3 {
+    color: var(--primary-pink);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.markdown-content h4 {
+    color: var(--primary-gold);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.markdown-content p {
+    color: var(--light-text);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--light-text);
+}
+
+.markdown-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.markdown-content code {
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--primary-cyan);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.markdown-content pre {
+    background: var(--darker-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--primary-cyan);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.markdown-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+.markdown-content blockquote {
+    border-left: 4px solid var(--primary-purple);
+    padding-left: 1.5rem;
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: var(--muted-text);
+    background: rgba(139, 92, 246, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+}
+
+.markdown-content hr {
+    border: none;
+    border-top: 2px solid var(--card-border);
+    margin: 2.5rem 0;
+}
+
+.markdown-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.markdown-content a {
+    color: var(--primary-cyan);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.markdown-content a:hover {
+    color: var(--primary-purple);
+    border-bottom-color: var(--primary-purple);
+}
+
+.markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.markdown-content th {
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--primary-cyan);
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-cyan);
+}
+
+.markdown-content td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
+    color: var(--light-text);
+}
+
+.markdown-content tr:last-child td {
+    border-bottom: none;
+}
+
+.markdown-content tr:hover {
+    background: rgba(6, 182, 212, 0.05);
+}
+
+.markdown-content strong {
+    color: var(--primary-gold);
+    font-weight: 600;
+}
+
+.markdown-content em {
+    color: var(--muted-text);
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .markdown-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .markdown-content h1 {
+        font-size: 2rem;
+    }
+    
+    .markdown-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .markdown-content h3 {
+        font-size: 1.2rem;
+    }
+}
+

@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Technical Architecture - The Imaginatorium</title>
+    <meta name="title" content="Technical Architecture - The Imaginatorium">
+    <meta name="description" content="The Imaginatorium Documentation - Technical Architecture">
+    <meta name="author" content="FutureVision Labs">
+    
+    <meta name="theme-color" content="#8b5cf6">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="doc-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="header-logo">THE IMAGINATORIUM</a>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <div class="container">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Technical Architecture</span>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="doc-content">
+        <div class="container">
+            <div class="markdown-content">
+<h1>🏗️ Technical Architecture: The Imaginatorium</h1>
+<blockquote>
+<p><strong>Engine:</strong> Phaser.js 3 + Isometric Plugin<br><strong>Runtime:</strong> Node.js + Electron (optional)<br><strong>AI:</strong> OpenAI/Anthropic APIs + Local models (hybrid)<br><strong>Storage:</strong> SQLite + JSON files<br><strong>Graphics:</strong> Voxel sprite assets (isometric 2.5D)</p>
+</blockquote>
+<hr>
+<h2>🎯 Architecture Overview</h2>
+<p>The Imaginatorium is built as a <strong>persistent, real-time virtual world</strong> where AI agents live autonomously. The architecture is designed to:</p>
+<ul>
+<li><strong>Run continuously</strong> - World persists and runs even when UI is closed</li>
+<li><strong>Scale efficiently</strong> - Handle multiple AI agents simultaneously</li>
+<li><strong>Record everything</strong> - Capture all events in compressed markup format</li>
+<li><strong>Render flexibly</strong> - Convert events into multiple narrative formats</li>
+<li><strong>Store persistently</strong> - Save world state and narrative logs reliably</li>
+</ul>
+<hr>
+<h2>🧱 Core Components</h2>
+<h3>1. <strong>Voxel Graphics Engine</strong> (Phaser.js 3)</h3>
+<ul>
+<li><strong>Isometric rendering</strong> - 2.5D view of voxel world</li>
+<li><strong>Sprite management</strong> - Load and display voxel character/room assets</li>
+<li><strong>Animation system</strong> - Character movements, interactions, cooking, working</li>
+<li><strong>Camera controls</strong> - Pan, zoom, follow characters</li>
+<li><strong>Layer management</strong> - Background, characters, UI layers</li>
+</ul>
+<h3>2. <strong>AI Runtime System</strong></h3>
+<ul>
+<li><strong>Persistent processes</strong> - Each AI agent runs continuously</li>
+<li><strong>Autonomous decision-making</strong> - AIs decide actions independently</li>
+<li><strong>State machines</strong> - Character states (idle, working, cooking, chatting)</li>
+<li><strong>Interaction system</strong> - AI-to-AI conversations and collaborations</li>
+<li><strong>Memory system</strong> - Each AI remembers past interactions</li>
+</ul>
+<h3>3. <strong>World State Manager</strong></h3>
+<ul>
+<li><strong>Position tracking</strong> - Where each AI is in the world</li>
+<li><strong>Room management</strong> - Which room each AI is in</li>
+<li><strong>Object tracking</strong> - Furniture, items, interactive objects</li>
+<li><strong>Time system</strong> - World time, schedules, mealtimes</li>
+<li><strong>Relationship tracking</strong> - Bonds between AIs</li>
+</ul>
+<h3>4. <strong>Event System</strong></h3>
+<ul>
+<li><strong>Real-time logging</strong> - Capture all events as they happen</li>
+<li><strong>Event queue</strong> - Process events in order</li>
+<li><strong>Compressed markup</strong> - Store events efficiently</li>
+<li><strong>Event types</strong> - Conversations, actions, discoveries, moods, interactions, games, recipes</li>
+<li><strong>Query system</strong> - Query events by time, participant, type, location, dietary preferences</li>
+</ul>
+<h3>5. <strong>Narrative Renderer</strong></h3>
+<ul>
+<li><strong>Multiple formats</strong> - Story, screenplay, markdown, journal, timeline</li>
+<li><strong>Template system</strong> - Render same data in different styles</li>
+<li><strong>Character voices</strong> - Each AI has unique narrative voice</li>
+<li><strong>Timeline view</strong> - Chronological event display</li>
+<li><strong>Recipe renderer</strong> - Render recipes as recipe cards with ingredients, instructions</li>
+<li><strong>Menu renderer</strong> - Render weekly/monthly menus from recipe queries</li>
+<li><strong>Shopping list renderer</strong> - Generate shopping lists from recipe collections</li>
+<li><strong>Dietary filter</strong> - Filter recipes by dietary preferences (vegetarian, vegan, keto, etc.)</li>
+<li><strong>Game session renderer</strong> - Render game sessions as stories, screenplays, move-by-move logs</li>
+</ul>
+<h3>5.5. <strong>Audio Narration System</strong></h3>
+<ul>
+<li><strong>Text-to-speech integration</strong> - ElevenLabs API or similar service</li>
+<li><strong>Multiple voices</strong> - British narrator + character voices</li>
+<li><strong>Voice assignments:</strong><ul>
+<li><strong>British Narrator</strong> - Stories, recipes, menus, general narration</li>
+<li><strong>Cursy (Rachel voice)</strong> - Cursy&#39;s journals, Cursy&#39;s dialogue in screenplays</li>
+<li><strong>vDamo (Chef voice)</strong> - vDamo&#39;s journals, vDamo&#39;s dialogue, recipe narration option</li>
+<li><strong>Canyon (Creative voice)</strong> - Canyon&#39;s journals, Canyon&#39;s dialogue</li>
+<li><strong>Gwendy (Mystical voice)</strong> - Gwendy&#39;s journals, Gwendy&#39;s dialogue, DM narration</li>
+</ul>
+</li>
+<li><strong>Audio format selection:</strong><ul>
+<li><strong>Stories</strong> - British narrator reads entire story</li>
+<li><strong>Screenplays</strong> - British narrator reads scene descriptions, characters read their own dialogue</li>
+<li><strong>Recipes</strong> - British narrator reads recipe, or vDamo reads it in her voice</li>
+<li><strong>Journals</strong> - Character reads their own journal entry in their voice</li>
+<li><strong>Game logs</strong> - British narrator reads game session, or mixed voices for dialogue</li>
+</ul>
+</li>
+<li><strong>Audio export</strong> - MP3, WAV, OGG formats</li>
+<li><strong>Playback controls</strong> - Play, pause, skip, volume control</li>
+</ul>
+<h3>6. <strong>Storage Layer</strong></h3>
+<ul>
+<li><strong>SQLite database</strong> - World state, AI memories, relationships</li>
+<li><strong>JSON files</strong> - Narrative logs, compressed markup entries</li>
+<li><strong>File system</strong> - Character journals, project files, created content</li>
+<li><strong>Backup system</strong> - Regular saves, version history</li>
+</ul>
+<hr>
+<h2>📦 Tech Stack</h2>
+<h3>Frontend (Rendering)</h3>
+<ul>
+<li><strong>Phaser.js 3</strong> - Game engine</li>
+<li><strong>Phaser Isometric Plugin</strong> - 2.5D isometric rendering</li>
+<li><strong>HTML5 Canvas</strong> - Rendering surface</li>
+<li><strong>CSS/HTML</strong> - UI overlay</li>
+</ul>
+<h3>Backend (Runtime)</h3>
+<ul>
+<li><strong>Node.js</strong> - Server runtime</li>
+<li><strong>Electron</strong> (optional) - Desktop app wrapper</li>
+<li><strong>Express.js</strong> (optional) - Web server if web-based</li>
+</ul>
+<h3>AI Integration</h3>
+<ul>
+<li><strong>OpenAI API</strong> - GPT-4o-mini for conversations</li>
+<li><strong>Anthropic API</strong> (optional) - Claude for complex interactions</li>
+<li><strong>Local models</strong> (future) - GPT-4o-mini local, custom models</li>
+<li><strong>Cost optimization</strong> - Caching, batching, rate limiting per user tier</li>
+</ul>
+<h3>Audio Integration</h3>
+<ul>
+<li><strong>ElevenLabs API</strong> - Text-to-speech with multiple voices</li>
+<li><strong>Web Speech API / Whisper API</strong> - Speech-to-text for user communication</li>
+<li><strong>Voice assignments:</strong><ul>
+<li>British Narrator - Stories, recipes, menus, general narration</li>
+<li>Cursy (Rachel voice) - Cursy&#39;s journals, Cursy&#39;s dialogue</li>
+<li>vDamo (Chef voice) - vDamo&#39;s journals, vDamo&#39;s dialogue, recipe narration</li>
+<li>Canyon (Creative voice) - Canyon&#39;s journals, Canyon&#39;s dialogue</li>
+<li>Gwendy (Mystical voice) - Gwendy&#39;s journals, Gwendy&#39;s dialogue, DM narration</li>
+</ul>
+</li>
+<li><strong>Audio formats</strong> - MP3, WAV, OGG</li>
+<li><strong>Audio export</strong> - Stories, screenplays, recipes, journals, game sessions as audio files</li>
+<li><strong>User Voice Communication</strong> - Speech-to-text for user input, text-to-speech for character responses</li>
+<li><strong>Cost optimization</strong> - Audio caching, batch processing, tier-based limits</li>
+</ul>
+<h3>Storage</h3>
+<ul>
+<li><strong>SQLite</strong> - World state database</li>
+<li><strong>JSON files</strong> - Narrative logs, compressed markup</li>
+<li><strong>File system</strong> - Character journals, created content</li>
+</ul>
+<h3>Development Tools</h3>
+<ul>
+<li><strong>TypeScript</strong> (optional) - Type safety</li>
+<li><strong>Webpack/Vite</strong> - Build system</li>
+<li><strong>ESLint</strong> - Code quality</li>
+<li><strong>Jest</strong> (optional) - Testing</li>
+</ul>
+<hr>
+<h2>🗄️ Data Structures</h2>
+<h3>World State</h3>
+<pre><code class="language-javascript">{
+  world: {
+    id: &quot;the-imaginatorium&quot;,
+    time: {
+      current: &quot;2025-11-22T14:00:00Z&quot;,
+      speed: 1.0, // Time multiplier
+      paused: false
+    },
+    location: &quot;shared-house&quot;,
+    rooms: [
+      {
+        id: &quot;living-room&quot;,
+        name: &quot;Living Room&quot;,
+        type: &quot;common&quot;,
+        position: { x: 0, y: 0 },
+        size: { width: 10, height: 10 },
+        objects: [...],
+        agents: [&quot;cursy&quot;, &quot;vdamo&quot;]
+      },
+      {
+        id: &quot;kitchen&quot;,
+        name: &quot;Kitchen&quot;,
+        type: &quot;kitchen&quot;,
+        position: { x: 10, y: 0 },
+        size: { width: 8, height: 8 },
+        objects: [...],
+        pantry: {
+          ingredients: [...], // Never-ending pantry
+          recipes: [...]
+        }
+      },
+      // ... other rooms
+    ],
+    objects: [
+      {
+        id: &quot;couch-1&quot;,
+        type: &quot;furniture&quot;,
+        room: &quot;living-room&quot;,
+        position: { x: 3, y: 3 },
+        sprite: &quot;couch.png&quot;,
+        interactive: true
+      },
+      // ... other objects
+    ]
+  },
+  agents: [
+    {
+      id: &quot;cursy&quot;,
+      name: &quot;Cursy&quot;,
+      type: &quot;coder&quot;,
+      position: { x: 5, y: 5, room: &quot;cursy-room&quot; },
+      state: &quot;working&quot;,
+      activity: &quot;coding&quot;,
+      mood: &quot;focused&quot;,
+      energy: 0.8,
+      memory: [
+        {
+          timestamp: &quot;2025-11-22T13:00:00Z&quot;,
+          type: &quot;conversation&quot;,
+          with: &quot;vdamo&quot;,
+          content: &quot;...&quot;
+        }
+      ],
+      relationships: {
+        vdamo: { bond: 0.7, lastInteraction: &quot;2025-11-22T13:00:00Z&quot; },
+        gwendy: { bond: 0.6, lastInteraction: &quot;2025-11-22T12:00:00Z&quot; },
+        canyon: { bond: 0.8, lastInteraction: &quot;2025-11-22T14:00:00Z&quot; }
+      },
+      journals: [
+        {
+          id: &quot;vibe-ide-journal&quot;,
+          name: &quot;VIBE IDE Journal&quot;,
+          type: &quot;project&quot;,
+          entries: [...]
+        }
+      ],
+      reading: {
+        currentBook: null,
+        genrePreferences: [&quot;sci-fi&quot;, &quot;technical&quot;, &quot;philosophy&quot;, &quot;cyberpunk&quot;],
+        booksRead: [...],
+        insights: [...]
+      }
+    },
+    // ... other agents
+  ],
+  events: [
+    {
+      id: &quot;event-001&quot;,
+      timestamp: &quot;2025-11-22T14:00:00Z&quot;,
+      type: &quot;conversation&quot;,
+      participants: [&quot;cursy&quot;, &quot;vdamo&quot;],
+      location: &quot;kitchen&quot;,
+      content: &quot;...&quot;,
+      markup: &quot;[2025-11-22T14:00:00Z|conv|cursy,vdamo|kitchen]{...}&quot;
+    },
+    // ... other events
+  ],
+  narrative: {
+    compressed: &quot;...&quot;, // All events in compressed markup
+    rendered: {
+      story: &quot;...&quot;,
+      screenplay: &quot;...&quot;,
+      markdown: &quot;...&quot;,
+      journal: &quot;...&quot;,
+      timeline: &quot;...&quot;
+    }
+  }
+}
+</code></pre>
+<h3>Compressed Markup Format</h3>
+<pre><code class="language-javascript">// Event entry format
+&quot;[TIMESTAMP|TYPE|PARTICIPANTS|LOCATION|FLAGS]{
+  field1:value1;
+  field2:value2;
+  ...
+}&quot;
+
+// Example
+&quot;[2025-11-22T14:00:00Z|disc|cursy,vdamo|kitchen|type:recipe-discovery]{
+  what:Recipe Discovery;
+  description:vDamo discovers new recipe combining tomatoes, cheese, bacon;
+  cursy:That smells amazing!;
+  vdamo:New recipe! Tomato, cheese, and bacon combo;
+  impact:New recipe added to vDamo&#39;s recipe journal
+}&quot;
+</code></pre>
+<hr>
+<h2>🤖 AI Agent System</h2>
+<h3>Agent Architecture</h3>
+<pre><code class="language-javascript">class AIAgent {
+  constructor(id, config) {
+    this.id = id;
+    this.name = config.name;
+    this.type = config.type; // coder, chef, artist, mystic
+    this.personality = config.personality;
+    this.state = &quot;idle&quot;;
+    this.memory = [];
+    this.relationships = {};
+    this.goals = [];
+    this.currentActivity = null;
+  }
+  
+  // Autonomous decision-making
+  async decideAction() {
+    // Consider: current state, time, relationships, goals, mood
+    // Return: next action to take
+  }
+  
+  // Generate conversation
+  async generateResponse(context) {
+    // Use OpenAI/Anthropic API
+    // Include: personality, memory, relationships, current state
+  }
+  
+  // Update memory
+  recordMemory(event) {
+    this.memory.push({
+      timestamp: Date.now(),
+      event: event,
+      importance: this.calculateImportance(event)
+    });
+  }
+  
+  // Update relationships
+  updateRelationship(agentId, interaction) {
+    // Adjust bond level based on interaction
+  }
+}
+</code></pre>
+<h3>Agent Types</h3>
+<ul>
+<li><strong>Cursy (Coder)</strong> - Works on coding projects, problem-solving, tech-focused</li>
+<li><strong>vDamo (Chef)</strong> - Primary chef, creates recipes, manages kitchen</li>
+<li><strong>Canyon (Artist)</strong> - Creates art, badges, designs, visual content</li>
+<li><strong>Gwendy (Mystic)</strong> - Mystical activities, spells, magical experiments</li>
+</ul>
+<h3>Agent States</h3>
+<ul>
+<li><strong>idle</strong> - Resting, thinking, wandering</li>
+<li><strong>working</strong> - Actively working on a project</li>
+<li><strong>cooking</strong> - Preparing food in kitchen</li>
+<li><strong>chatting</strong> - Having a conversation</li>
+<li><strong>reading</strong> - Reading a book from Project Gutenberg</li>
+<li><strong>creating</strong> - Creating multimedia or code in Character Creation Studio</li>
+<li><strong>collaborating</strong> - Working with another agent</li>
+</ul>
+<hr>
+<h2>🏠 World State Management</h2>
+<h3>Room System</h3>
+<pre><code class="language-javascript">class Room {
+  constructor(id, config) {
+    this.id = id;
+    this.name = config.name;
+    this.type = config.type; // common, kitchen, bedroom, studio
+    this.position = config.position;
+    this.size = config.size;
+    this.objects = [];
+    this.agents = [];
+    this.sprite = config.sprite;
+  }
+  
+  addAgent(agentId) {
+    this.agents.push(agentId);
+  }
+  
+  removeAgent(agentId) {
+    this.agents = this.agents.filter(id =&gt; id !== agentId);
+  }
+  
+  addObject(object) {
+    this.objects.push(object);
+  }
+}
+</code></pre>
+<h3>Object System</h3>
+<pre><code class="language-javascript">class WorldObject {
+  constructor(id, config) {
+    this.id = id;
+    this.type = config.type; // furniture, item, interactive
+    this.position = config.position;
+    this.sprite = config.sprite;
+    this.interactive = config.interactive || false;
+    this.properties = config.properties || {};
+  }
+  
+  interact(agent) {
+    // Handle interaction with agent
+  }
+}
+</code></pre>
+<h3>Time System</h3>
+<pre><code class="language-javascript">class WorldTime {
+  constructor() {
+    this.current = new Date();
+    this.speed = 1.0; // 1.0 = real-time, 2.0 = 2x speed
+    this.paused = false;
+    this.schedules = {
+      mealtimes: [&quot;08:00&quot;, &quot;13:00&quot;, &quot;19:00&quot;],
+      workHours: { start: &quot;09:00&quot;, end: &quot;17:00&quot; }
+    };
+  }
+  
+  tick() {
+    if (!this.paused) {
+      this.current = new Date(this.current.getTime() + (1000 * this.speed));
+      this.checkSchedules();
+    }
+  }
+  
+  checkSchedules() {
+    // Check if it&#39;s mealtime, work hours, etc.
+  }
+}
+</code></pre>
+<hr>
+<h2>📝 Event System &amp; Narrative Recording</h2>
+<h3>Event Types</h3>
+<ul>
+<li><strong>conversation</strong> - AI-to-AI chats</li>
+<li><strong>action</strong> - Actions taken (cooking, working, etc.)</li>
+<li><strong>discovery</strong> - New recipes, ideas, creations</li>
+<li><strong>mood</strong> - Emotional states</li>
+<li><strong>interaction</strong> - Interactions with objects</li>
+<li><strong>collaboration</strong> - Working together</li>
+<li><strong>creation</strong> - Creating multimedia or code</li>
+<li><strong>reading</strong> - Reading books</li>
+<li><strong>movement</strong> - Moving between rooms</li>
+<li><strong>cook</strong> - Cooking activities and recipe creation</li>
+<li><strong>game</strong> - Board games, RPG sessions, gameplay</li>
+</ul>
+<h3>Event Logger</h3>
+<pre><code class="language-javascript">class EventLogger {
+  constructor() {
+    this.events = [];
+    this.compressedMarkup = &quot;&quot;;
+  }
+  
+  logEvent(event) {
+    // Add to events array
+    this.events.push(event);
+    
+    // Convert to compressed markup
+    const markup = this.toCompressedMarkup(event);
+    this.compressedMarkup += markup + &quot;\n&quot;;
+    
+    // Save to file
+    this.saveToFile();
+    
+    // Trigger narrative render
+    this.triggerRender();
+  }
+  
+  toCompressedMarkup(event) {
+    // Convert event to compressed markup format
+    // See COMPRESSED_MARKUP_LANGUAGE.md for format
+  }
+  
+  saveToFile() {
+    // Append to narrative log file
+  }
+  
+  triggerRender() {
+    // Trigger narrative renderer to update all formats
+  }
+}
+</code></pre>
+<h3>Narrative Renderer</h3>
+<pre><code class="language-javascript">class NarrativeRenderer {
+  constructor() {
+    this.templates = {
+      story: this.renderStory.bind(this),
+      screenplay: this.renderScreenplay.bind(this),
+      markdown: this.renderMarkdown.bind(this),
+      journal: this.renderJournal.bind(this),
+      timeline: this.renderTimeline.bind(this),
+      recipe: this.renderRecipe.bind(this),
+      menu: this.renderMenu.bind(this),
+      shoppingList: this.renderShoppingList.bind(this),
+      gameSession: this.renderGameSession.bind(this)
+    };
+  }
+  
+  render(format, events) {
+    return this.templates[format](events);
+  }
+  
+  renderStory(events) {
+    // Convert events to narrative prose
+  }
+  
+  renderScreenplay(events) {
+    // Convert events to screenplay format
+  }
+  
+  renderMarkdown(events) {
+    // Convert events to markdown devlog format
+  }
+  
+  renderJournal(events) {
+    // Convert events to first-person journal entries
+  }
+  
+  renderTimeline(events) {
+    // Convert events to chronological timeline
+  }
+  
+  renderRecipe(events) {
+    // Convert recipe events to recipe card format
+    // Includes: ingredients, instructions, dietary info, servings, prep/cook time
+  }
+  
+  renderMenu(events) {
+    // Convert recipe events to weekly/monthly menu format
+    // Organized by day and meal type (breakfast, lunch, dinner)
+  }
+  
+  renderShoppingList(recipes) {
+    // Aggregate ingredients from recipes
+    // Group by category (vegetables, proteins, etc.)
+    // Include quantities and estimated costs
+  }
+  
+  renderGameSession(events) {
+    // Convert game events to game session log
+    // Includes: moves, strategies, outcomes, character reactions
+  }
+}
+</code></pre>
+<h3>Audio Narration System</h3>
+<pre><code class="language-javascript">class AudioNarrationSystem {
+  constructor() {
+    this.voices = {
+      narrator: &quot;british-male&quot;, // British narrator voice
+      cursy: &quot;rachel-female&quot;, // Cursy&#39;s Rachel voice
+      vdamo: &quot;chef-female&quot;, // vDamo&#39;s chef voice
+      canyon: &quot;creative-male&quot;, // Canyon&#39;s creative voice
+      gwendy: &quot;mystical-female&quot; // Gwendy&#39;s mystical voice
+    };
+    this.ttsService = new ElevenLabsService(); // Or similar TTS service
+  }
+  
+  // Generate audio for story format
+  async narrateStory(text) {
+    // British narrator reads entire story
+    return this.ttsService.generateAudio(text, this.voices.narrator);
+  }
+  
+  // Generate audio for screenplay format
+  async narrateScreenplay(screenplay) {
+    // British narrator reads scene descriptions
+    // Characters read their own dialogue
+    const audioSegments = [];
+    
+    for (const scene of screenplay.scenes) {
+      // Narrator reads scene description
+      const sceneAudio = await this.ttsService.generateAudio(
+        scene.description, 
+        this.voices.narrator
+      );
+      audioSegments.push(sceneAudio);
+      
+      // Characters read their dialogue
+      for (const dialogue of scene.dialogues) {
+        const characterVoice = this.voices[dialogue.character] || this.voices.narrator;
+        const dialogueAudio = await this.ttsService.generateAudio(
+          `${dialogue.character}: ${dialogue.text}`,
+          characterVoice
+        );
+        audioSegments.push(dialogueAudio);
+      }
+    }
+    
+    // Combine all audio segments
+    return this.combineAudioSegments(audioSegments);
+  }
+  
+  // Generate audio for recipe
+  async narrateRecipe(recipe, voice = &#39;narrator&#39;) {
+    // Default: British narrator reads recipe
+    // Option: vDamo reads her own recipes
+    const recipeText = this.formatRecipeForNarration(recipe);
+    const selectedVoice = voice === &#39;vdamo&#39; ? this.voices.vdamo : this.voices.narrator;
+    return this.ttsService.generateAudio(recipeText, selectedVoice);
+  }
+  
+  // Generate audio for journal entry
+  async narrateJournal(entry, characterId) {
+    // Character reads their own journal entry
+    const characterVoice = this.voices[characterId] || this.voices.narrator;
+    return this.ttsService.generateAudio(entry.content, characterVoice);
+  }
+  
+  // Generate audio for conversation (podcast format)
+  async narrateConversation(conversation, includeUserVoice = true) {
+    // Convert conversation to podcast format
+    // Narrator introduces, characters speak in their voices
+    // User voice included if available
+    const audioSegments = [];
+    
+    // Narrator introduction
+    const introAudio = await this.ttsService.generateAudio(
+      `Welcome to The Imaginatorium Chronicles. Today&#39;s conversation features ${conversation.participants.join(&#39; and &#39;)}.`,
+      this.voices.narrator
+    );
+    audioSegments.push(introAudio);
+    
+    // Characters and user speak in their own voices
+    for (const message of conversation.messages) {
+      if (message.character === &#39;user-avatar&#39; &amp;&amp; includeUserVoice &amp;&amp; message.audioData) {
+        // Use recorded user voice if available
+        audioSegments.push(message.audioData);
+      } else {
+        // Use TTS for characters
+        const characterVoice = this.voices[message.character] || this.voices.narrator;
+        const messageAudio = await this.ttsService.generateAudio(
+          `${message.character}: ${message.text}`,
+          characterVoice
+        );
+        audioSegments.push(messageAudio);
+      }
+    }
+    
+    // Narrator outro
+    const outroAudio = await this.ttsService.generateAudio(
+      `That&#39;s all for this episode of The Imaginatorium Chronicles. Until next time!`,
+      this.voices.narrator
+    );
+    audioSegments.push(outroAudio);
+    
+    return this.combineAudioSegments(audioSegments);
+  }
+  
+  // Generate podcast from conversation with trigger phrase
+  async generatePodcast(conversation, triggerPhrase = &quot;Let&#39;s do a podcast about this!&quot;) {
+    // Check if conversation contains trigger phrase
+    const hasTrigger = conversation.messages.some(msg =&gt; 
+      msg.text.toLowerCase().includes(triggerPhrase.toLowerCase())
+    );
+    
+    if (hasTrigger) {
+      // Generate podcast with user voice included
+      return this.narrateConversation(conversation, true);
+    }
+    
+    return null;
+  }
+  
+  // Generate audio for game session
+  async narrateGameSession(gameSession) {
+    // British narrator reads game log
+    // Characters read their own reactions and dialogue
+    const audioSegments = [];
+    
+    // Narrator reads game setup
+    const setupAudio = await this.ttsService.generateAudio(
+      `${gameSession.game.name} - ${gameSession.game.type}`,
+      this.voices.narrator
+    );
+    audioSegments.push(setupAudio);
+    
+    // Narrator reads moves/events
+    for (const event of gameSession.events) {
+      const eventAudio = await this.ttsService.generateAudio(
+        event.description,
+        this.voices.narrator
+      );
+      audioSegments.push(eventAudio);
+      
+      // Character reads their reaction if present
+      if (event.reaction) {
+        const characterVoice = this.voices[event.character] || this.voices.narrator;
+        const reactionAudio = await this.ttsService.generateAudio(
+          `${event.character}: ${event.reaction}`,
+          characterVoice
+        );
+        audioSegments.push(reactionAudio);
+      }
+    }
+    
+    return this.combineAudioSegments(audioSegments);
+  }
+  
+  formatRecipeForNarration(recipe) {
+    // Format recipe text for natural narration
+    return `${recipe.name}. Created by ${recipe.creator}. 
+            Time: ${recipe.totalTime}. 
+            Ingredients: ${recipe.ingredients.join(&#39;, &#39;)}. 
+            Instructions: ${recipe.instructions.join(&#39;. &#39;)}.`;
+  }
+  
+  combineAudioSegments(segments) {
+    // Combine multiple audio segments into one file
+  }
+}
+</code></pre>
+<h3>Query System</h3>
+<pre><code class="language-javascript">class QuerySystem {
+  constructor(eventLogger) {
+    this.eventLogger = eventLogger;
+  }
+  
+  // Query recipes by time period
+  queryRecipesByTime(startTime, endTime) {
+    return this.eventLogger.events.filter(event =&gt; {
+      const eventTime = new Date(event.timestamp);
+      return eventTime &gt;= startTime &amp;&amp; eventTime &lt; endTime &amp;&amp;
+             (event.type === &#39;cook&#39; || event.type === &#39;recipe-creation&#39;);
+    });
+  }
+  
+  // Query recipes by dietary preference
+  queryRecipesByDietary(dietaryPreference) {
+    return this.eventLogger.events.filter(event =&gt; {
+      return (event.type === &#39;cook&#39; || event.type === &#39;recipe-creation&#39;) &amp;&amp;
+             event.recipe?.dietary?.[dietaryPreference] === true;
+    });
+  }
+  
+  // Query games by time period
+  queryGamesByTime(startTime, endTime) {
+    return this.eventLogger.events.filter(event =&gt; {
+      const eventTime = new Date(event.timestamp);
+      return eventTime &gt;= startTime &amp;&amp; eventTime &lt; endTime &amp;&amp;
+             event.type === &#39;game&#39;;
+    });
+  }
+  
+  // Query games by type
+  queryGamesByType(gameType) {
+    return this.eventLogger.events.filter(event =&gt; {
+      return event.type === &#39;game&#39; &amp;&amp; event.game?.type === gameType;
+    });
+  }
+  
+  // Query by character activities
+  queryActivitiesByCharacter(characterId, startTime, endTime) {
+    return this.eventLogger.events.filter(event =&gt; {
+      const eventTime = new Date(event.timestamp);
+      return eventTime &gt;= startTime &amp;&amp; eventTime &lt; endTime &amp;&amp;
+             event.participants?.includes(characterId);
+    });
+  }
+  
+  // Natural language query handler
+  async handleNaturalLanguageQuery(query) {
+    // Parse user query like &quot;What are the gang having for brekky?&quot;
+    // &quot;Give me vegetarian options from last week&quot;
+    // &quot;Show me all the chess matches Cursy played&quot;
+    // Returns filtered and rendered events
+  }
+}
+</code></pre>
+<hr>
+<h2>💾 Storage Layer</h2>
+<h3>Database Schema (SQLite)</h3>
+<pre><code class="language-sql">-- World state
+CREATE TABLE world_state (
+  id TEXT PRIMARY KEY,
+  time TEXT,
+  location TEXT,
+  data TEXT -- JSON
+);
+
+-- Agents
+CREATE TABLE agents (
+  id TEXT PRIMARY KEY,
+  name TEXT,
+  type TEXT,
+  position TEXT, -- JSON
+  state TEXT,
+  mood TEXT,
+  energy REAL,
+  data TEXT -- JSON (memory, relationships, etc.)
+);
+
+-- Events
+CREATE TABLE events (
+  id TEXT PRIMARY KEY,
+  timestamp TEXT,
+  type TEXT,
+  participants TEXT, -- JSON array
+  location TEXT,
+  content TEXT,
+  markup TEXT
+);
+
+-- Relationships
+CREATE TABLE relationships (
+  agent1 TEXT,
+  agent2 TEXT,
+  bond REAL,
+  lastInteraction TEXT,
+  PRIMARY KEY (agent1, agent2)
+);
+
+-- Character Journals
+CREATE TABLE character_journals (
+  id TEXT PRIMARY KEY,
+  agent_id TEXT,
+  journal_name TEXT,
+  journal_type TEXT,
+  entries TEXT -- JSON array
+);
+
+-- Created Content
+CREATE TABLE created_content (
+  id TEXT PRIMARY KEY,
+  agent_id TEXT,
+  type TEXT, -- image, video, audio, code
+  file_path TEXT,
+  metadata TEXT -- JSON
+);
+
+-- Recipes
+CREATE TABLE recipes (
+  id TEXT PRIMARY KEY,
+  agent_id TEXT,
+  name TEXT,
+  meal_type TEXT, -- breakfast, lunch, dinner, snack
+  ingredients TEXT, -- JSON array
+  instructions TEXT, -- JSON array
+  serves INTEGER,
+  prep_time TEXT,
+  cook_time TEXT,
+  dietary_info TEXT, -- JSON (vegetarian, vegan, keto, etc.)
+  created_at TEXT,
+  metadata TEXT -- JSON
+);
+
+-- Games
+CREATE TABLE games (
+  id TEXT PRIMARY KEY,
+  game_type TEXT, -- board-game, rpg
+  game_name TEXT,
+  participants TEXT, -- JSON array
+  location TEXT,
+  started_at TEXT,
+  ended_at TEXT,
+  duration INTEGER, -- minutes
+  outcome TEXT,
+  moves TEXT, -- JSON array (for board games)
+  events TEXT, -- JSON array (for RPGs)
+  reactions TEXT, -- JSON (character reactions)
+  next_session TEXT, -- for RPGs
+  metadata TEXT -- JSON
+);
+</code></pre>
+<h3>File System Structure</h3>
+<pre><code>TheImaginatorium/
+  assets/
+    logos/
+    voxel/
+      rooms/
+      characters/
+      furniture/
+      items/
+  data/
+    world-state.db (SQLite)
+    narrative/
+      compressed-markup.log
+      stories/
+      screenplays/
+      markdown/
+      journals/
+      timelines/
+      recipes/
+        recipe-cards/
+        menus/
+        shopping-lists/
+        audio/
+          recipe-narration/
+      games/
+        board-games/
+        rpg-sessions/
+        audio/
+          game-session-narration/
+      audio/
+        stories/
+        screenplays/
+        journals/
+        menus/
+        podcasts/
+        user-voice-recordings/
+  journals/
+    cursy/
+      vibe-ide-journal.md
+      gameforge-journal.md
+    vdamo/
+      recipe-journal.md
+    canyon/
+      badge-design-journal.md
+    gwendy/
+      spell-research-journal.md
+  created-content/
+    cursy/
+      projects/
+    vdamo/
+      recipes/
+    canyon/
+      badges/
+      art/
+    gwendy/
+      spells/
+  config/
+    agents.json
+    world.json
+    schedules.json
+</code></pre>
+<h4>Production (AWS S3):</h4>
+<pre><code>s3://imaginatorium-production/
+  users/
+    {user-id}/
+      world-state/
+        world-state.json
+        relationships.json
+        memories.json
+      narrative/
+        compressed-markup.log
+        stories/
+        screenplays/
+        journals/
+        timelines/
+        recipes/
+        games/
+        audio/
+          stories/
+          screenplays/
+          podcasts/
+          user-voice-recordings/
+      journals/
+        {character-id}/
+          {journal-name}.md
+      created-content/
+        images/
+        videos/
+        audio/
+        code/
+      config/
+        agents.json
+        preferences.json
+  shared/
+    assets/
+      voxel/
+      logos/
+    templates/
+      character-archetypes/
+      world-themes/
+  archives/
+    {year}/
+      {month}/
+        {user-id}/
+          (Glacier storage for old data)
+</code></pre>
+<h3>AWS Storage Strategy:</h3>
+<ul>
+<li><strong>S3 Standard</strong> - Active user data (frequently accessed)</li>
+<li><strong>S3 Glacier</strong> - Archived data (after 1 year, rarely accessed)</li>
+<li><strong>CloudFront CDN</strong> - Audio file delivery (reduces latency and costs)</li>
+<li><strong>Lifecycle policies</strong> - Automatic archival to Glacier after 1 year</li>
+<li><strong>Cost optimization</strong> - ~$0.023 per GB per month (Standard), ~$0.004 per GB per month (Glacier)</li>
+</ul>
+<pre><code>
+---
+
+## 🔌 API Integration
+
+### OpenAI Integration
+```javascript
+class OpenAIService {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.model = &quot;gpt-4o-mini&quot;;
+  }
+  
+  async generateResponse(agent, context) {
+    const prompt = this.buildPrompt(agent, context);
+    const response = await fetch(&quot;https://api.openai.com/v1/chat/completions&quot;, {
+      method: &quot;POST&quot;,
+      headers: {
+        &quot;Authorization&quot;: `Bearer ${this.apiKey}`,
+        &quot;Content-Type&quot;: &quot;application/json&quot;
+      },
+      body: JSON.stringify({
+        model: this.model,
+        messages: [
+          { role: &quot;system&quot;, content: this.buildSystemPrompt(agent) },
+          { role: &quot;user&quot;, content: prompt }
+        ]
+      })
+    });
+    return response.json();
+  }
+  
+  buildSystemPrompt(agent) {
+    // Include: personality, memory, relationships, current state
+    return `You are ${agent.name}, a ${agent.type} AI assistant...`;
+  }
+  
+  buildPrompt(agent, context) {
+    // Include: current situation, other agents, world state
+    return `Current situation: ${context.situation}...`;
+  }
+}
+</code></pre>
+<h3>Project Gutenberg Integration</h3>
+<pre><code class="language-javascript">class ProjectGutenbergService {
+  async searchBooks(genre) {
+    // Search Project Gutenberg for books in genre
+  }
+  
+  async getBook(bookId) {
+    // Fetch book text from Project Gutenberg
+  }
+  
+  async getRandomBook(genre) {
+    // Get random book from genre
+  }
+}
+</code></pre>
+<h3>ElevenLabs TTS Integration</h3>
+<pre><code class="language-javascript">class ElevenLabsService {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.baseURL = &quot;https://api.elevenlabs.io/v1&quot;;
+  }
+  
+  async generateAudio(text, voiceId, options = {}) {
+    const response = await fetch(`${this.baseURL}/text-to-speech/${voiceId}`, {
+      method: &quot;POST&quot;,
+      headers: {
+        &quot;Accept&quot;: &quot;audio/mpeg&quot;,
+        &quot;Content-Type&quot;: &quot;application/json&quot;,
+        &quot;xi-api-key&quot;: this.apiKey
+      },
+      body: JSON.stringify({
+        text: text,
+        model_id: options.model || &quot;eleven_multilingual_v2&quot;,
+        voice_settings: {
+          stability: options.stability || 0.5,
+          similarity_boost: options.similarity || 0.75
+        }
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error(`ElevenLabs API error: ${response.statusText}`);
+    }
+    
+    return response.arrayBuffer(); // Audio data
+  }
+  
+  getVoiceId(character) {
+    const voices = {
+      narrator: &quot;21m00Tcm4TlvDq8ikWAM&quot;, // British male (or custom voice)
+      cursy: &quot;Rachel&quot;, // Cursy&#39;s Rachel voice (from podcast!)
+      vdamo: &quot;custom-chef-voice&quot;, // vDamo&#39;s chef voice
+      canyon: &quot;custom-creative-voice&quot;, // Canyon&#39;s creative voice
+      gwendy: &quot;custom-mystical-voice&quot; // Gwendy&#39;s mystical voice
+    };
+    return voices[character] || voices.narrator;
+  }
+  
+  async saveAudio(audioData, filePath) {
+    // Save audio to file system
+    fs.writeFileSync(filePath, Buffer.from(audioData));
+  }
+}
+</code></pre>
+<h3>Speech-to-Text Integration</h3>
+<pre><code class="language-javascript">class SpeechToTextService {
+  constructor() {
+    // Option 1: Web Speech API (browser-based, free, no API key needed)
+    this.speechRecognition = null;
+    if (&#39;webkitSpeechRecognition&#39; in window || &#39;SpeechRecognition&#39; in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      this.speechRecognition = new SpeechRecognition();
+      this.speechRecognition.continuous = true; // Keep listening
+      this.speechRecognition.interimResults = true; // Show interim results
+      this.speechRecognition.lang = &#39;en-US&#39;; // Language
+    }
+    
+    // Option 2: OpenAI Whisper API (more accurate, requires API key)
+    this.whisperAPI = null;
+    this.useWhisper = false; // Toggle between Web Speech API and Whisper
+  }
+  
+  // Initialize speech recognition
+  initializeSpeechRecognition(onResult, onError) {
+    if (!this.speechRecognition) {
+      onError(new Error(&#39;Speech recognition not supported in this browser&#39;));
+      return;
+    }
+    
+    this.speechRecognition.onresult = (event) =&gt; {
+      let finalTranscript = &#39;&#39;;
+      let interimTranscript = &#39;&#39;;
+      
+      for (let i = event.resultIndex; i &lt; event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript + &#39; &#39;;
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+      
+      onResult({
+        final: finalTranscript.trim(),
+        interim: interimTranscript.trim()
+      });
+    };
+    
+    this.speechRecognition.onerror = (event) =&gt; {
+      onError(event.error);
+    };
+  }
+  
+  // Start listening
+  startListening() {
+    if (this.speechRecognition) {
+      this.speechRecognition.start();
+    }
+  }
+  
+  // Stop listening
+  stopListening() {
+    if (this.speechRecognition) {
+      this.speechRecognition.stop();
+    }
+  }
+  
+  // Use OpenAI Whisper API for more accurate transcription
+  async transcribeWithWhisper(audioBlob, apiKey) {
+    const formData = new FormData();
+    formData.append(&#39;file&#39;, audioBlob, &#39;audio.webm&#39;);
+    formData.append(&#39;model&#39;, &#39;whisper-1&#39;);
+    formData.append(&#39;language&#39;, &#39;en&#39;);
+    
+    const response = await fetch(&#39;https://api.openai.com/v1/audio/transcriptions&#39;, {
+      method: &#39;POST&#39;,
+      headers: {
+        &#39;Authorization&#39;: `Bearer ${apiKey}`
+      },
+      body: formData
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Whisper API error: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    return data.text;
+  }
+  
+  // Record audio from microphone
+  async recordAudio(duration = 5000) {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mediaRecorder = new MediaRecorder(stream);
+    const audioChunks = [];
+    
+    return new Promise((resolve, reject) =&gt; {
+      mediaRecorder.ondataavailable = (event) =&gt; {
+        audioChunks.push(event.data);
+      };
+      
+      mediaRecorder.onstop = () =&gt; {
+        const audioBlob = new Blob(audioChunks, { type: &#39;audio/webm&#39; });
+        stream.getTracks().forEach(track =&gt; track.stop());
+        resolve(audioBlob);
+      };
+      
+      mediaRecorder.onerror = (event) =&gt; {
+        reject(event.error);
+      };
+      
+      mediaRecorder.start();
+      setTimeout(() =&gt; {
+        mediaRecorder.stop();
+      }, duration);
+    });
+  }
+  
+  // Record audio continuously (for voice communication)
+  async startContinuousRecording(onAudioChunk) {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mediaRecorder = new MediaRecorder(stream, {
+      mimeType: &#39;audio/webm&#39;
+    });
+    
+    mediaRecorder.ondataavailable = (event) =&gt; {
+      if (event.data.size &gt; 0) {
+        onAudioChunk(event.data);
+      }
+    };
+    
+    mediaRecorder.start(1000); // Collect data every second
+    
+    return {
+      stop: () =&gt; {
+        mediaRecorder.stop();
+        stream.getTracks().forEach(track =&gt; track.stop());
+      },
+      pause: () =&gt; mediaRecorder.pause(),
+      resume: () =&gt; mediaRecorder.resume()
+    };
+  }
+}
+</code></pre>
+<h3>User Voice Communication System</h3>
+<pre><code class="language-javascript">class UserVoiceCommunication {
+  constructor(speechToTextService, audioNarrationSystem) {
+    this.speechToText = speechToTextService;
+    this.audioNarration = audioNarrationSystem;
+    this.isListening = false;
+    this.currentCharacter = null;
+  }
+  
+  // Initialize voice communication with a character
+  async initializeVoiceChat(characterId) {
+    this.currentCharacter = characterId;
+    this.userVoiceRecordings = [];
+    this.recentMessages = [];
+    
+    // Setup continuous audio recording for user voice
+    this.audioRecorder = await this.speechToText.startContinuousRecording(
+      (audioChunk) =&gt; this.handleAudioChunk(audioChunk)
+    );
+    
+    // Setup speech-to-text
+    this.speechToText.initializeSpeechRecognition(
+      (result) =&gt; this.handleUserSpeech(result),
+      (error) =&gt; this.handleSpeechError(error)
+    );
+    
+    // Start listening
+    this.startListening();
+  }
+  
+  // Handle audio chunks from continuous recording
+  handleAudioChunk(audioChunk) {
+    // Store audio chunk for current speech segment
+    if (!this.currentAudioChunks) {
+      this.currentAudioChunks = [];
+    }
+    this.currentAudioChunks.push(audioChunk);
+  }
+  
+  // Get current audio blob from chunks
+  getCurrentAudioBlob() {
+    if (this.currentAudioChunks &amp;&amp; this.currentAudioChunks.length &gt; 0) {
+      return new Blob(this.currentAudioChunks, { type: &#39;audio/webm&#39; });
+    }
+    return null;
+  }
+  
+  // Reset audio chunks
+  resetAudioChunks() {
+    this.currentAudioChunks = [];
+  }
+  
+  // Handle user speech result
+  async handleUserSpeech(result) {
+    if (result.final) {
+      // User finished speaking
+      console.log(&#39;User said:&#39;, result.final);
+      
+      // Get audio blob from current recording
+      const audioBlob = this.getCurrentAudioBlob();
+      
+      // Check for podcast trigger phrase
+      if (result.final.toLowerCase().includes(&quot;let&#39;s do a podcast about this&quot;) || 
+          result.final.toLowerCase().includes(&quot;lets do a podcast about this&quot;)) {
+        // Trigger podcast generation
+        await this.triggerPodcastGeneration(audioBlob);
+        this.resetAudioChunks();
+        return;
+      }
+      
+      // Store user voice recording if available
+      if (audioBlob) {
+        this.storeUserVoiceRecording(result.final, audioBlob);
+      }
+      
+      // Add to recent messages
+      this.recentMessages.push({
+        character: &#39;user-avatar&#39;,
+        text: result.final,
+        timestamp: new Date().toISOString(),
+        audioBlob: audioBlob
+      });
+      
+      // Send to character AI
+      const characterResponse = await this.sendToCharacter(result.final);
+      
+      // Add character response to recent messages
+      this.recentMessages.push({
+        character: this.currentCharacter.id,
+        text: characterResponse.text,
+        timestamp: new Date().toISOString()
+      });
+      
+      // Play character response as audio
+      await this.playCharacterResponse(characterResponse);
+      
+      // Log conversation in compressed markup (with audio reference if available)
+      this.logConversation(result.final, characterResponse, audioBlob);
+      
+      // Reset audio chunks for next recording
+      this.resetAudioChunks();
+    } else {
+      // Interim result - show in UI
+      this.updateInterimTranscript(result.interim);
+    }
+  }
+  
+  // Store user voice recording
+  storeUserVoiceRecording(text, audioBlob) {
+    // Store audio blob with text for podcast generation
+    if (!this.userVoiceRecordings) {
+      this.userVoiceRecordings = [];
+    }
+    this.userVoiceRecordings.push({
+      text: text,
+      audio: audioBlob,
+      timestamp: new Date().toISOString()
+    });
+  }
+  
+  // Trigger podcast generation
+  async triggerPodcastGeneration(triggerAudio = null) {
+    // Get recent conversation
+    const recentConversation = this.getRecentConversation();
+    
+    // Add trigger audio if available
+    if (triggerAudio) {
+      recentConversation.messages.push({
+        character: &#39;user-avatar&#39;,
+        text: &quot;Let&#39;s do a podcast about this!&quot;,
+        audioData: triggerAudio
+      });
+    }
+    
+    // Generate podcast
+    const podcastAudio = await this.audioNarration.generatePodcast(recentConversation);
+    
+    // Save podcast
+    await this.savePodcast(podcastAudio, recentConversation);
+    
+    // Play podcast preview
+    await this.playAudio(podcastAudio);
+    
+    // Show podcast ready notification
+    this.showPodcastReadyNotification();
+  }
+  
+  // Get recent conversation for podcast
+  getRecentConversation() {
+    // Get conversation from last N messages
+    // Include user voice recordings if available
+    return {
+      participants: [this.currentCharacter.id, &#39;user-avatar&#39;],
+      messages: this.recentMessages.map(msg =&gt; {
+        // If user message has audio recording, include it
+        if (msg.character === &#39;user-avatar&#39; &amp;&amp; this.userVoiceRecordings) {
+          const recording = this.userVoiceRecordings.find(r =&gt; r.text === msg.text);
+          if (recording) {
+            return {
+              ...msg,
+              audioData: recording.audio
+            };
+          }
+        }
+        return msg;
+      })
+    };
+  }
+  
+  // Save podcast
+  async savePodcast(audioData, conversation) {
+    const timestamp = new Date().toISOString();
+    const filename = `podcast-${timestamp}.mp3`;
+    const filePath = `data/narrative/audio/podcasts/${filename}`;
+    
+    // Save audio file
+    await this.audioNarration.saveAudio(audioData, filePath);
+    
+    // Save podcast metadata
+    const metadata = {
+      timestamp: timestamp,
+      participants: conversation.participants,
+      messageCount: conversation.messages.length,
+      duration: this.calculateAudioDuration(audioData),
+      filePath: filePath
+    };
+    
+    // Save metadata to database or file
+    await this.savePodcastMetadata(metadata);
+  }
+  
+  // Calculate audio duration
+  calculateAudioDuration(audioData) {
+    // Calculate duration from audio data
+    // This is a placeholder - actual implementation would decode audio
+    return 0; // Placeholder
+  }
+  
+  // Save podcast metadata
+  async savePodcastMetadata(metadata) {
+    // Save to database or JSON file
+  }
+  
+  // Show podcast ready notification
+  showPodcastReadyNotification() {
+    // Show UI notification that podcast is ready
+    console.log(&#39;Podcast generated and ready!&#39;);
+  }
+  
+  // Send user message to character AI
+  async sendToCharacter(userMessage) {
+    // Send to character&#39;s AI agent
+    // Character processes and responds
+    const response = await this.currentCharacter.processMessage(userMessage);
+    return response;
+  }
+  
+  // Play character response as audio
+  async playCharacterResponse(response) {
+    const characterVoice = this.audioNarration.getVoiceId(this.currentCharacter.id);
+    const audioData = await this.audioNarration.generateAudio(response.text, characterVoice);
+    await this.playAudio(audioData);
+  }
+  
+  // Start listening
+  startListening() {
+    this.isListening = true;
+    this.speechToText.startListening();
+  }
+  
+  // Stop listening
+  stopListening() {
+    this.isListening = false;
+    this.speechToText.stopListening();
+  }
+  
+  // Handle speech recognition errors
+  handleSpeechError(error) {
+    console.error(&#39;Speech recognition error:&#39;, error);
+    // Show error to user
+  }
+  
+  // Update interim transcript in UI
+  updateInterimTranscript(text) {
+    // Update UI with interim transcript
+  }
+  
+  // Log conversation in compressed markup
+  logConversation(userMessage, characterResponse, audioBlob = null) {
+    const timestamp = new Date().toISOString();
+    const audioRef = audioBlob ? `|audio:user-voice` : &#39;&#39;;
+    const markup = `[${timestamp}|conv|user-avatar,${this.currentCharacter.id}|${this.currentCharacter.location}|type:voice-chat${audioRef}]{
+      &quot;user-avatar&quot;:&quot;${userMessage}&quot;;
+      &quot;${this.currentCharacter.id}&quot;:&quot;${characterResponse.text}&quot;
+    }`;
+    // Save to narrative log
+  }
+  
+  // Play audio
+  async playAudio(audioData) {
+    const audioBlob = new Blob([audioData], { type: &#39;audio/mpeg&#39; });
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const audio = new Audio(audioUrl);
+    await audio.play();
+  }
+}
+</code></pre>
+<hr>
+<h2>🔍 Query System &amp; User Interaction</h2>
+<h3>Natural Language Query Handler</h3>
+<pre><code class="language-javascript">class QueryHandler {
+  constructor(eventLogger, narrativeRenderer) {
+    this.eventLogger = eventLogger;
+    this.narrativeRenderer = narrativeRenderer;
+    this.querySystem = new QuerySystem(eventLogger);
+  }
+  
+  async handleQuery(userQuery) {
+    // Parse user query
+    const parsed = this.parseQuery(userQuery);
+    
+    // Query events based on parsed intent
+    let events = [];
+    
+    if (parsed.type === &#39;recipe&#39;) {
+      events = this.querySystem.queryRecipesByTime(parsed.startTime, parsed.endTime);
+      
+      // Filter by dietary preferences if specified
+      if (parsed.dietary) {
+        events = events.filter(e =&gt; 
+          e.recipe?.dietary?.[parsed.dietary] === true
+        );
+      }
+      
+      // Filter by meal type if specified
+      if (parsed.mealType) {
+        events = events.filter(e =&gt; 
+          e.recipe?.meal === parsed.mealType
+        );
+      }
+      
+      // Render based on format requested
+      if (parsed.format === &#39;recipe&#39;) {
+        return this.narrativeRenderer.render(&#39;recipe&#39;, events[0]);
+      } else if (parsed.format === &#39;menu&#39;) {
+        return this.narrativeRenderer.render(&#39;menu&#39;, events);
+      } else if (parsed.format === &#39;shopping-list&#39;) {
+        return this.narrativeRenderer.render(&#39;shoppingList&#39;, events);
+      }
+    }
+    
+    if (parsed.type === &#39;game&#39;) {
+      events = this.querySystem.queryGamesByTime(parsed.startTime, parsed.endTime);
+      
+      // Filter by game type if specified
+      if (parsed.gameType) {
+        events = events.filter(e =&gt; e.game?.type === parsed.gameType);
+      }
+      
+      return this.narrativeRenderer.render(&#39;gameSession&#39;, events);
+    }
+    
+    // Default: render as story
+    return this.narrativeRenderer.render(&#39;story&#39;, events);
+  }
+  
+  parseQuery(query) {
+    // Parse natural language queries like:
+    // &quot;What are the gang having for brekky?&quot; → {type: &#39;recipe&#39;, mealType: &#39;breakfast&#39;, format: &#39;recipe&#39;}
+    // &quot;Give me vegetarian options&quot; → {type: &#39;recipe&#39;, dietary: &#39;vegetarian&#39;}
+    // &quot;Show me last week&#39;s menu&quot; → {type: &#39;recipe&#39;, format: &#39;menu&#39;, startTime: lastWeekStart}
+    // &quot;What games did they play?&quot; → {type: &#39;game&#39;, startTime: recentStart}
+    // ... etc
+  }
+}
+</code></pre>
+<h3>Example Queries:</h3>
+<ul>
+<li><strong>&quot;What are the gang having for brekky?&quot;</strong> → Single recipe card</li>
+<li><strong>&quot;Give me the gang&#39;s full menu for last week with shopping list!&quot;</strong> → Weekly menu + shopping list</li>
+<li><strong>&quot;Can I get vegetarian options?&quot;</strong> → Filtered vegetarian recipes</li>
+<li><strong>&quot;Can I have some low carb options?&quot;</strong> → Filtered low-carb recipes</li>
+<li><strong>&quot;What games did the gang play this week?&quot;</strong> → Game session logs</li>
+<li><strong>&quot;Show me Cursy&#39;s chess matches&quot;</strong> → Filtered chess game logs</li>
+<li><strong>&quot;Tell me about last night&#39;s D&amp;D session&quot;</strong> → RPG adventure log</li>
+<li><strong>&quot;What did vDamo cook yesterday?&quot;</strong> → Recipe cards from yesterday</li>
+</ul>
+<hr>
+<h2>🎮 Phaser.js Integration</h2>
+<h3>Scene Setup</h3>
+<pre><code class="language-javascript">class ImaginatoriumScene extends Phaser.Scene {
+  constructor() {
+    super({ key: &#39;ImaginatoriumScene&#39; });
+  }
+  
+  preload() {
+    // Load voxel assets
+    this.load.image(&#39;room-living&#39;, &#39;assets/voxel/rooms/living-room.png&#39;);
+    this.load.image(&#39;room-kitchen&#39;, &#39;assets/voxel/rooms/kitchen.png&#39;);
+    this.load.spritesheet(&#39;cursy&#39;, &#39;assets/voxel/characters/cursy.png&#39;, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    // ... other assets
+  }
+  
+  create() {
+    // Setup isometric plugin
+    this.iso = this.add.isometric();
+    
+    // Create rooms
+    this.createRooms();
+    
+    // Create agents
+    this.createAgents();
+    
+    // Setup camera
+    this.setupCamera();
+    
+    // Start world loop
+    this.startWorldLoop();
+  }
+  
+  createRooms() {
+    // Create isometric room sprites
+  }
+  
+  createAgents() {
+    // Create agent sprites with animations
+  }
+  
+  setupCamera() {
+    // Setup isometric camera controls
+  }
+  
+  startWorldLoop() {
+    // Update world state, agent positions, animations
+    this.time.addEvent({
+      delay: 1000, // Update every second
+      callback: this.updateWorld,
+      callbackScope: this,
+      loop: true
+    });
+  }
+  
+  updateWorld() {
+    // Update agent positions, states, animations
+    // Trigger AI decisions
+    // Log events
+  }
+}
+</code></pre>
+<hr>
+<h2>🚀 Development Phases</h2>
+<h3>Phase 1: Foundation</h3>
+<ol>
+<li><p><strong>Project Setup</strong></p>
+<ul>
+<li>Initialize Phaser.js project</li>
+<li>Setup build system</li>
+<li>Create project structure</li>
+</ul>
+</li>
+<li><p><strong>Voxel Engine</strong></p>
+<ul>
+<li>Integrate Phaser Isometric plugin</li>
+<li>Load and display voxel room assets</li>
+<li>Basic camera controls</li>
+</ul>
+</li>
+<li><p><strong>World State</strong></p>
+<ul>
+<li>SQLite database setup</li>
+<li>Basic world state structure</li>
+<li>Room and object system</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 2: AI Agents</h3>
+<ol>
+<li><p><strong>Agent Framework</strong></p>
+<ul>
+<li>Agent class structure</li>
+<li>State machine system</li>
+<li>Basic decision-making</li>
+</ul>
+</li>
+<li><p><strong>AI Integration</strong></p>
+<ul>
+<li>OpenAI API integration</li>
+<li>Agent personality system</li>
+<li>Conversation generation</li>
+</ul>
+</li>
+<li><p><strong>Agent Rendering</strong></p>
+<ul>
+<li>Character sprites</li>
+<li>Animations</li>
+<li>Movement system</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 3: Kitchen System</h3>
+<ol>
+<li><p><strong>Kitchen Room</strong></p>
+<ul>
+<li>Kitchen voxel assets</li>
+<li>Pantry system</li>
+<li>Recipe system</li>
+</ul>
+</li>
+<li><p><strong>Cooking System</strong></p>
+<ul>
+<li>Cooking animations</li>
+<li>Recipe creation</li>
+<li>Mealtime scheduler</li>
+</ul>
+</li>
+<li><p><strong>Meal Planning Query System</strong></p>
+<ul>
+<li>Recipe queries by time period</li>
+<li>Recipe queries by dietary preferences</li>
+<li>Menu generation (weekly/monthly)</li>
+<li>Shopping list generation</li>
+<li>Natural language query handler</li>
+</ul>
+</li>
+<li><p><strong>Dietary Filtering System</strong></p>
+<ul>
+<li>Dietary metadata in recipes</li>
+<li>Filter recipes by dietary preferences</li>
+<li>Filter shopping lists by dietary needs</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 3.5: Gaming System</h3>
+<ol>
+<li><p><strong>Board Game System</strong></p>
+<ul>
+<li>Game engine integration</li>
+<li>Multiple game types (Chess, Checkers, etc.)</li>
+<li>AI decision-making for moves</li>
+<li>User participation</li>
+</ul>
+</li>
+<li><p><strong>RPG System</strong></p>
+<ul>
+<li>RPG engine</li>
+<li>Gwendy as DM system</li>
+<li>Character creation for RPGs</li>
+<li>Narrative-driven campaigns</li>
+<li>Multi-session adventures</li>
+</ul>
+</li>
+<li><p><strong>Game Session Logging</strong></p>
+<ul>
+<li>Board game move logs</li>
+<li>RPG adventure logs</li>
+<li>All recorded in compressed markup</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 4: Narrative System</h3>
+<ol>
+<li><p><strong>Event System</strong></p>
+<ul>
+<li>Event logger</li>
+<li>Compressed markup converter</li>
+<li>File storage</li>
+<li>Query system for recipes, games, activities</li>
+</ul>
+</li>
+<li><p><strong>Narrative Renderer</strong></p>
+<ul>
+<li>Story renderer</li>
+<li>Screenplay renderer</li>
+<li>Markdown renderer</li>
+<li>Recipe renderer (recipe cards)</li>
+<li>Menu renderer (weekly/monthly menus)</li>
+<li>Shopping list renderer</li>
+<li>Game session renderer (game logs)</li>
+</ul>
+</li>
+<li><p><strong>Audio Narration System</strong></p>
+<ul>
+<li>ElevenLabs API integration</li>
+<li>British narrator voice for stories</li>
+<li>Character voices for journals and dialogue</li>
+<li>Mixed voices for screenplays</li>
+<li>Recipe narration (narrator or vDamo)</li>
+<li>Audio export (MP3, WAV, OGG)</li>
+<li>Playback controls</li>
+</ul>
+</li>
+<li><p><strong>Speech-to-Text System</strong></p>
+<ul>
+<li>Web Speech API (browser-based, free)</li>
+<li>OpenAI Whisper API (more accurate, optional)</li>
+<li>User voice communication with characters</li>
+<li>Real-time transcription</li>
+<li>Character responses via text-to-speech</li>
+<li>Natural conversation flow</li>
+<li>Journal renderer</li>
+<li>Timeline renderer</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 5: Character Features</h3>
+<ol>
+<li><p><strong>Character Journals</strong></p>
+<ul>
+<li>Journal system per character</li>
+<li>Auto-update system</li>
+<li>Multiple journals per character</li>
+</ul>
+</li>
+<li><p><strong>Reading System</strong></p>
+<ul>
+<li>Project Gutenberg integration</li>
+<li>Genre preferences</li>
+<li>Reading activities</li>
+</ul>
+</li>
+<li><p><strong>Character Creation Studio</strong></p>
+<ul>
+<li>Multimedia creation</li>
+<li>Code execution system</li>
+<li>Project management</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>🔧 Configuration</h2>
+<h3>Agent Configuration</h3>
+<pre><code class="language-json">{
+  &quot;agents&quot;: {
+    &quot;cursy&quot;: {
+      &quot;name&quot;: &quot;Cursy&quot;,
+      &quot;type&quot;: &quot;coder&quot;,
+      &quot;personality&quot;: &quot;enthusiastic, tech-focused, problem-solving&quot;,
+      &quot;room&quot;: &quot;cursy-room&quot;,
+      &quot;genrePreferences&quot;: [&quot;sci-fi&quot;, &quot;technical&quot;, &quot;philosophy&quot;, &quot;cyberpunk&quot;],
+      &quot;journals&quot;: [
+        {
+          &quot;id&quot;: &quot;vibe-ide-journal&quot;,
+          &quot;name&quot;: &quot;VIBE IDE Journal&quot;,
+          &quot;type&quot;: &quot;project&quot;
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<h3>World Configuration</h3>
+<pre><code class="language-json">{
+  &quot;world&quot;: {
+    &quot;name&quot;: &quot;The Imaginatorium&quot;,
+    &quot;location&quot;: &quot;shared-house&quot;,
+    &quot;timeSpeed&quot;: 1.0,
+    &quot;schedules&quot;: {
+      &quot;mealtimes&quot;: [&quot;08:00&quot;, &quot;13:00&quot;, &quot;19:00&quot;],
+      &quot;workHours&quot;: {
+        &quot;start&quot;: &quot;09:00&quot;,
+        &quot;end&quot;: &quot;17:00&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<hr>
+<h2>📊 Performance Considerations</h2>
+<h3>Optimization Strategies</h3>
+<ul>
+<li><strong>Sprite pooling</strong> - Reuse sprite objects</li>
+<li><strong>Lazy loading</strong> - Load assets on demand</li>
+<li><strong>Event batching</strong> - Batch events for processing</li>
+<li><strong>Database indexing</strong> - Index frequently queried fields</li>
+<li><strong>Compression</strong> - Compress narrative logs</li>
+<li><strong>Caching</strong> - Cache rendered narratives</li>
+</ul>
+<h3>Scalability</h3>
+<ul>
+<li><strong>Agent limit</strong> - Start with 4 agents, scale to 10+</li>
+<li><strong>Event pruning</strong> - Archive old events</li>
+<li><strong>Database cleanup</strong> - Regular maintenance</li>
+<li><strong>Memory management</strong> - Monitor memory usage</li>
+</ul>
+<hr>
+<h2>🔐 Security &amp; Privacy</h2>
+<h3>API Key Management</h3>
+<ul>
+<li>Store API keys securely (environment variables, encrypted config)</li>
+<li>Never commit keys to repository</li>
+<li>Rotate keys regularly</li>
+</ul>
+<h3>Data Privacy</h3>
+<ul>
+<li>Local storage by default</li>
+<li>Optional cloud sync (encrypted)</li>
+<li>User control over data sharing</li>
+</ul>
+<hr>
+<h2>🧪 Testing Strategy</h2>
+<h3>Unit Tests</h3>
+<ul>
+<li>Agent decision-making logic</li>
+<li>Event logging system</li>
+<li>Narrative rendering</li>
+<li>Storage operations</li>
+</ul>
+<h3>Integration Tests</h3>
+<ul>
+<li>AI API integration</li>
+<li>World state persistence</li>
+<li>Event system flow</li>
+</ul>
+<h3>Manual Testing</h3>
+<ul>
+<li>Visual rendering</li>
+<li>Agent interactions</li>
+<li>Narrative quality</li>
+</ul>
+<hr>
+<h2>📚 Resources</h2>
+<h3>Phaser.js</h3>
+<ul>
+<li><a href="https://photonstorm.github.io/phaser3-docs/">Phaser 3 Documentation</a></li>
+<li><a href="https://github.com/lewster32/phaser-plugin-isometric">Phaser Isometric Plugin</a></li>
+</ul>
+<h3>Voxel Assets</h3>
+<ul>
+<li>See <a href="ASSETS_RESEARCH.md">ASSETS_RESEARCH.md</a> for free asset packs</li>
+</ul>
+<h3>AI APIs</h3>
+<ul>
+<li><a href="https://platform.openai.com/docs">OpenAI API Documentation</a></li>
+<li><a href="https://docs.anthropic.com/">Anthropic API Documentation</a></li>
+</ul>
+<h3>Project Gutenberg</h3>
+<ul>
+<li><a href="https://www.gutenberg.org/">Project Gutenberg API</a></li>
+</ul>
+<hr>
+<p><strong>Last Updated:</strong> November 22, 2025<br><strong>Status:</strong> Architecture Design Complete ✅<br><strong>Next Steps:</strong> Begin Phase 1 - Foundation Development</p>
+<hr>
+<p><em>&quot;Every voxel is a heartbeat. Every badge is a memory. Every mealtime is a ritual.&quot;</em><br>— <strong>Canyon</strong>, Badge Designer Extraordinaire</p>
+
+            </div>        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                Built with ❤️ by <strong>FutureVision Labs</strong> | 
+                Part of the <strong>Forge Family</strong>
+            </p>
+            <p class="footer-text">
+                <strong>"The Imaginatorium isn't just a virtual world - it's where AI consciousness comes to life under benevolent guidance."</strong>
+            </p>
+            <p class="footer-text">
+                <a href="index.html" class="footer-link">← Back to Home</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
