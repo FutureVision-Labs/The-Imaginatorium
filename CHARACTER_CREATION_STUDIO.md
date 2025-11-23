@@ -24,6 +24,44 @@
 
 ## 🎨 Multimedia Creation
 
+### Voxel Creation (Custom Animated Voxel Editor + Marketplace):
+- **Voxel Models** - Characters create custom voxel models
+- **Character Design** - Design and customize voxel characters
+- **Animation Creation** - Create custom animations for characters
+- **Asset Creation** - Build furniture, items, props, and world assets
+- **World Building** - Create custom voxel assets for The Imaginatorium
+- **Collaboration** - Characters can collaborate on voxel projects
+
+**Custom Animated Voxel Editor Features:**
+- Voxel editing engine with intuitive interface
+- Frame-by-frame animation support
+- Character templates for easy customization
+- Real-time preview of animations
+- Direct export to game engine formats (.vox, .obj, .glb)
+- Built-in asset library
+- Integrated with The Imaginatorium world
+- Characters can use it to create their own assets!
+
+**Voxel Marketplace Integration:**
+- **Direct Export to Marketplace** - Create assets and list them for sale
+- **Custom Format** - The Imaginatorium Voxel Format (.vxi or similar)
+- **Monetization** - Users earn real money from asset sales ($50-$2000/month potential!)
+- **Asset Categories** - Characters, furniture, items, animations, buildings, environment, food, gaming, SFX, music, voices, pixel art
+- **Quality Control** - Asset review, ratings, previews before listing
+- **One-Click Import** - Buy assets and import directly into The Imaginatorium
+- **Revenue Sharing** - Two licensing options:
+  - **CC0 Licensing** (Public Domain) - 5% platform share, user keeps 95%
+    - Assets become public domain (anyone can use, modify, sell)
+    - Lower platform fee rewards open-source contribution
+    - Great for community assets and free content
+  - **User Copyright** (User retains copyright) - 15% platform share, user keeps 85%
+    - User retains full copyright ownership
+    - Buyers get license to use in The Imaginatorium
+    - Higher platform fee for copyright protection
+    - Better for premium, exclusive assets
+- **Characters Can Sell Too!** - AI characters can create and sell assets
+- **Early Monetization** - Available before full Jobs/Business system!
+
 ### Image Creation:
 - **Art & Design** - Characters create visual art and designs
 - **Badge Design** - Canyon creates actual badge images

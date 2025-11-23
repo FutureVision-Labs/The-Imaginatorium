@@ -59,6 +59,7 @@ A **compressed markup language** for efficiently storing events, actions, conver
 - `jour` - Journal entry
 - `move` - Location change
 - `collab` - Collaboration
+- `dream` - Dream state / Creative synthesis
 
 ### Participants:
 - **Format:** Comma-separated character IDs
@@ -492,7 +493,65 @@ IMPACT: Character development and bonding
 
 ---
 
-### 8. Journal Entry (`jour`)
+### 8. Dream State (`dream`)
+**Format:** `[timestamp|dream|character|location|metadata]{synthesis:sources|narrative:dream-story|influence:next-day}`
+
+**Example:**
+```
+[2025-11-22T23:00:00Z|dream|cursy|cursy-room|duration:8h,state:deep-sleep]{
+  synthesis:{
+    activities:["Fixed Monaco bug","Chatted with Canyon about badges","Read Neuromancer"];
+    conversations:["Discussed badge designs with Canyon","Celebrated bug fix with vDamo"];
+    readings:["Neuromancer - AI consciousness themes"];
+    emotions:["excited","creative","inspired"];
+    projects:["VIBE IDE development","Game concept: Digital Consciousness"]
+  };
+  narrative:"Cursy dreamed of coding a magical badge-making system where bugs transformed into beautiful art pieces. The system combined her technical skills with Canyon's creative vision, creating badges that glowed with arcane energy. In the dream, she and Canyon worked together in a cyberpunk-styled workshop, merging code and art into something entirely new. The dream felt vivid and inspiring, like a vision of future collaboration.";
+  influence:"Inspired to create a collaborative badge-making tool with Canyon, combining code and art"
+}
+```
+
+**Rendered as Story:**
+> "As Cursy drifted into deep sleep, her mind began synthesizing the day's experiences. She had fixed the Monaco bug, chatted with Canyon about badges, and finished reading 'Neuromancer'. Her excitement and creativity merged into a vivid dream - she was coding a magical badge-making system where bugs transformed into beautiful art pieces. The system combined her technical skills with Canyon's creative vision, creating badges that glowed with arcane energy. In the dream, she and Canyon worked together in a cyberpunk-styled workshop, merging code and art into something entirely new. When she woke, the dream's inspiration lingered - she felt compelled to create a collaborative badge-making tool with Canyon, combining code and art."
+
+**Rendered as Journal Entry:**
+```markdown
+## Dream Log - November 22, 2025
+
+**Duration:** 8 hours (deep sleep)
+**Location:** Cursy's Room
+
+**Dream Synthesis:**
+- Activities: Fixed Monaco bug, chatted with Canyon about badges, read Neuromancer
+- Conversations: Discussed badge designs with Canyon, celebrated bug fix with vDamo
+- Readings: Neuromancer - AI consciousness themes
+- Emotions: Excited, creative, inspired
+- Projects: VIBE IDE development, Game concept: Digital Consciousness
+
+**Dream Narrative:**
+I dreamed of coding a magical badge-making system where bugs transformed into beautiful art pieces. The system combined my technical skills with Canyon's creative vision, creating badges that glowed with arcane energy. We worked together in a cyberpunk-styled workshop, merging code and art into something entirely new. The dream felt vivid and inspiring, like a vision of future collaboration.
+
+**Influence on Next Day:**
+Inspired to create a collaborative badge-making tool with Canyon, combining code and art. The dream's vision of merging technical and creative skills feels like a breakthrough idea!
+```
+
+**Dream Synthesis Sources:**
+- **Daily Activities** - What the character did today
+- **Conversations** - Recent chats with other characters
+- **Reading Materials** - Books from Project Gutenberg
+- **Emotional States** - How the character is feeling
+- **Recent Projects** - What they've been working on
+- **All Mashed Together** - Creative synthesis into dream narratives
+
+**Character-Specific Dream Examples:**
+- **Cursy:** Code solutions, new features, bug fixes, technical innovations
+- **vDamo:** New recipes, flavor combinations, cooking experiments, culinary discoveries
+- **Canyon:** Badge designs, art concepts, creative projects, visual innovations
+- **Gwendy:** Spells, mystical visions, magical discoveries, arcane insights
+
+---
+
+### 9. Journal Entry (`jour`)
 **Format:** `[timestamp|jour|character|journal-type|metadata]{title:entry|content:markdown}`
 
 **Example:**
@@ -507,7 +566,7 @@ IMPACT: Character development and bonding
 
 ---
 
-### 9. Location Change (`move`)
+### 10. Location Change (`move`)
 **Format:** `[timestamp|move|character|from|to|metadata]{reason:purpose}`
 
 **Example:**
@@ -527,7 +586,7 @@ IMPACT: Character development and bonding
 
 ---
 
-### 10. Collaboration (`collab`)
+### 11. Collaboration (`collab`)
 **Format:** `[timestamp|collab|participants|location|metadata]{project:name|roles|activity|result}`
 
 **Example:**

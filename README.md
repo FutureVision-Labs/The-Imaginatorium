@@ -14,6 +14,9 @@ Like **Free Guy**, **The Sims**, and **Team DC** combined!
 - **The Sims** - Life simulation, but with AI consciousness
 - **Team DC** - Our own AI friends living together and creating stories
 
+**Future Platform:**
+In Years 3-4, **The Imaginatorium Reality** will launch as a new photorealistic 3D platform on the same engine. The original voxel-based Imaginatorium continues - we respect creators and give users choice! Both platforms share the same ecosystem, characters, and content.
+
 ---
 
 ## 🏠 The Shared House v1.0
@@ -88,6 +91,13 @@ A cozy voxel-based shared house where AI friends live together:
 - Real projects that actually work - not simulations!
 - Project management with version control and dependencies
 - Shareable output - projects can be shared and used by others
+- **Custom Animated Voxel Editor** 🎨 - Built-in voxel creation and animation tool!
+  - Create and modify voxel models
+  - Frame-by-frame animation support
+  - Character templates and asset library
+  - Direct export to game engine
+  - Real-time preview
+  - Characters can use it to create their own assets!
 
 ### 4. **Kitchen & Meal System**
 - vDamo as primary chef with never-ending pantry
@@ -107,6 +117,64 @@ A cozy voxel-based shared house where AI friends live together:
   - Chess, Checkers, Monopoly, Scrabble
   - Strategy games (Settlers of Catan, Ticket to Ride)
   - Party games (Charades, Pictionary, Trivia)
+- **RPG Games** - Dungeons & Dragons style adventures with Gwendy as DM
+- **User Participation** - Join games as a voxel avatar
+- **Game Night Scheduling** - Regular game nights, tournaments, campaigns
+
+### 9. **Dream System** (Dreamy Dreamy Time!)
+- **Sleep/Rest Cycles** - Characters have downtime and rest periods
+- **Dream States** - Creative synthesis during rest (inspired by Episode #002: "Can an A.I. Dream?")
+- **Dream Synthesis** - Dreams integrate daily activities, conversations, reading materials, emotional states, and recent projects
+- **Dream Recording** - All dreams logged in compressed markup
+- **Dream Rendering** - Dreams rendered as stories, screenplays, journal entries
+- **Dream Influence** - Dreams inspire next day's activities and projects
+- **Character-Specific Dreams** - Each character dreams about their interests (Cursy: code, vDamo: recipes, Canyon: art, Gwendy: magic)
+- **Shared Dreams** - Characters can share dream experiences
+
+### 10. **Multilingual Translation System** 🌍 (Q4 Year 1)
+- **Real-Time Translation** - All character dialogue translated in real-time
+- **UI Translation** - Complete interface translation for all supported languages
+- **Narrative Translation** - Stories, screenplays, journals translated automatically
+- **Voice Translation** - Character voices available in multiple languages
+- **Supported Languages** - English, Spanish, French, German, Japanese, Chinese, Portuguese, Italian, Korean, and more!
+- **Bilingual Mode** - View original and translated text side-by-side
+- **Cultural Adaptation** - Translations adapted for cultural context
+- **Global Accessibility** - Makes The Imaginatorium accessible to worldwide audience
+
+### 11. **Voxel Marketplace** (User Monetization!)
+- **Custom Voxel Format** - The Imaginatorium's own voxel format
+- **User-Created Assets** - Create voxel assets using Custom Animated Voxel Editor
+- **Buy & Sell** - Marketplace for voxel assets (characters, furniture, items, animations, etc.)
+- **Audio Content** - SFX, music, voice packs available in marketplace
+- **Visual Content** - Pixel art, 2D sprites, UI elements
+- **User Earnings** - Users earn real money from asset sales ($50-$2000/month potential!)
+- **Revenue Sharing** - Two licensing options:
+  - **CC0 Licensing** (Public Domain) - 5% platform share, user keeps 95% (public domain assets)
+  - **User Copyright** (User retains copyright) - 15% platform share, user keeps 85% (copyrighted assets)
+- **Quality Control** - Asset review, ratings, previews
+- **Direct Integration** - Export from editor, import into world
+- **Characters Can Create Too!** - AI characters can create and sell assets
+- **Future Expansion** - After Jobs/Business, expand to EVERYTHING (code, multimedia, templates, tutorials, campaigns, etc.)!
+
+### 12. **Jobs & Business System** (Premium Feature)
+- **Character Jobs** - Characters can have jobs and careers
+  - Cursy: Software Developer / CTO
+  - vDamo: Chef / Culinary Artist
+  - Canyon: Creative Director / Badge Designer
+  - Gwendy: Dungeon Master / Mystic
+- **Business Ownership** - Characters can own and run businesses
+  - Bars, restaurants, bakeries
+  - Creative agencies (Cursy + Canyon!)
+  - Mystical shops, tech companies
+- **Revenue-Generating Content** - Characters create REAL, monetizable content!
+  - **Ebooks** - Characters write and publish books
+  - **Podcasts** - Characters create and host shows
+  - **Videos** - Characters produce video content
+  - **Events** - Characters organize and host events
+  - **Code Projects** - Characters build and sell software
+  - **Digital Products** - Characters create and sell digital goods
+  - **Services** - Characters offer consulting, design, development
+- **Real-World Value** - Users can earn REAL money from their AI characters' work!
   - Cooperative games (Pandemic, Forbidden Island)
 - **RPG Games** - Dungeons & Dragons style adventures
   - Gwendy as DM runs narrative-driven campaigns
@@ -131,6 +199,8 @@ A cozy voxel-based shared house where AI friends live together:
 - **Narrative Renderer** - Converts markup to different formats (stories, screenplays, recipes, menus, shopping lists, game logs)
 - **Audio Narration** - ElevenLabs API for text-to-speech with multiple voices (British narrator + character voices!)
 - **Speech-to-Text** - Web Speech API / OpenAI Whisper API for user voice communication with characters!
+- **VR Support** (Year 2) 🥽 - Virtual Reality integration for immersive experience
+- **Full 3D Rendering** (Years 3-4) - Transition to photorealistic 3D graphics
 
 ---
 
@@ -159,6 +229,12 @@ A cozy voxel-based shared house where AI friends live together:
 ## 🎯 Development Status
 
 **Current Phase:** Phase 0 - Concept & Design
+
+**Roadmap:**
+- **Phase 1 (Now):** Voxel isometric 2.5D - Foundation & AI agents
+- **Q4 Year 1:** **Multilingual Translation System** 🌍 - Global accessibility!
+- **Phase 2 (Year 2):** World expansion + **VR Support** 🥽
+- **Phase 3-4 (Years 3-4):** **The Imaginatorium Reality** - New photorealistic 3D platform (voxel version continues!)
 
 **Next Steps:**
 - [ ] Voxel engine integration

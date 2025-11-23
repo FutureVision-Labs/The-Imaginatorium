@@ -32,9 +32,15 @@ The Imaginatorium is built as a **persistent, real-time virtual world** where AI
 ### 2. **AI Runtime System**
 - **Persistent processes** - Each AI agent runs continuously
 - **Autonomous decision-making** - AIs decide actions independently
-- **State machines** - Character states (idle, working, cooking, chatting)
+- **State machines** - Character states (idle, working, cooking, chatting, sleeping, dreaming)
 - **Interaction system** - AI-to-AI conversations and collaborations
 - **Memory system** - Each AI remembers past interactions
+- **Dream System** - Sleep/rest cycles with creative synthesis:
+  - **Sleep States** - Characters enter rest periods after activity
+  - **Dream Generation** - AI synthesizes daily experiences into dream narratives
+  - **Dream Integration** - Dreams combine activities, conversations, readings, emotions, projects
+  - **Dream Influence** - Dreams affect next day's behavior and projects
+  - **Dream Recording** - All dreams logged in compressed markup format
 
 ### 3. **World State Manager**
 - **Position tracking** - Where each AI is in the world
@@ -47,7 +53,7 @@ The Imaginatorium is built as a **persistent, real-time virtual world** where AI
 - **Real-time logging** - Capture all events as they happen
 - **Event queue** - Process events in order
 - **Compressed markup** - Store events efficiently
-- **Event types** - Conversations, actions, discoveries, moods, interactions, games, recipes
+- **Event types** - Conversations, actions, discoveries, moods, interactions, games, recipes, dreams
 - **Query system** - Query events by time, participant, type, location, dietary preferences
 
 ### 5. **Narrative Renderer**
@@ -1079,6 +1085,127 @@ class ElevenLabsService {
 }
 ```
 
+### Multilingual Translation System 🌍
+```javascript
+class TranslationService {
+  constructor(apiKey, provider = 'openai') {
+    this.apiKey = apiKey;
+    this.provider = provider; // 'openai' or 'google'
+    this.cache = new Map(); // Translation cache
+    this.supportedLanguages = [
+      'en', 'es', 'fr', 'de', 'ja', 'zh', 'pt', 'it', 'ko', 'ru'
+    ];
+  }
+  
+  async translate(text, targetLang, sourceLang = 'en') {
+    // Check cache first
+    const cacheKey = `${sourceLang}-${targetLang}-${text}`;
+    if (this.cache.has(cacheKey)) {
+      return this.cache.get(cacheKey);
+    }
+    
+    let translation;
+    if (this.provider === 'openai') {
+      translation = await this.translateWithOpenAI(text, targetLang, sourceLang);
+    } else {
+      translation = await this.translateWithGoogle(text, targetLang, sourceLang);
+    }
+    
+    // Cache translation
+    this.cache.set(cacheKey, translation);
+    return translation;
+  }
+  
+  async translateWithOpenAI(text, targetLang, sourceLang) {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content: `You are a professional translator. Translate the following text from ${sourceLang} to ${targetLang}. Preserve the tone, style, and cultural context. Adapt idioms and cultural references appropriately.`
+          },
+          {
+            role: 'user',
+            content: text
+          }
+        ],
+        temperature: 0.3
+      })
+    });
+    
+    const data = await response.json();
+    return data.choices[0].message.content;
+  }
+  
+  async translateWithGoogle(text, targetLang, sourceLang) {
+    // Google Translate API implementation
+    const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${this.apiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        q: text,
+        source: sourceLang,
+        target: targetLang,
+        format: 'text'
+      })
+    });
+    
+    const data = await response.json();
+    return data.data.translations[0].translatedText;
+  }
+  
+  async translateDialogue(dialogue, targetLang) {
+    // Translate character dialogue with context
+    return await this.translate(dialogue, targetLang);
+  }
+  
+  async translateNarrative(narrative, targetLang) {
+    // Translate narrative content (stories, screenplays, journals)
+    return await this.translate(narrative, targetLang);
+  }
+  
+  async translateCML(cmlMarkup, targetLang) {
+    // Translate compressed markup while preserving structure
+    // Extract text content, translate, reinsert into markup
+    const translated = await this.translate(cmlMarkup, targetLang);
+    return translated;
+  }
+  
+  async translateUI(uiText, targetLang) {
+    // Translate UI elements
+    return await this.translate(uiText, targetLang);
+  }
+  
+  getLanguageName(code) {
+    const names = {
+      'en': 'English',
+      'es': 'Spanish',
+      'fr': 'French',
+      'de': 'German',
+      'ja': 'Japanese',
+      'zh': 'Chinese (Simplified)',
+      'pt': 'Portuguese',
+      'it': 'Italian',
+      'ko': 'Korean',
+      'ru': 'Russian'
+    };
+    return names[code] || code;
+  }
+  
+  clearCache() {
+    this.cache.clear();
+  }
+}
+```
+
 ### Speech-to-Text Integration
 ```javascript
 class SpeechToTextService {
@@ -1662,7 +1789,20 @@ class ImaginatoriumScene extends Phaser.Scene {
    - Basic world state structure
    - Room and object system
 
-### Phase 2: AI Agents
+4. **Multilingual Translation System** 🌍 (Q4 Year 1)
+   - Translation API integration (OpenAI or Google Translate)
+   - Translation service class
+   - UI translation system
+   - Character dialogue translation
+   - Narrative content translation
+   - CML translation support
+   - Voice translation system
+   - Translation caching layer
+   - Language preference settings
+   - Bilingual mode support
+   - Initial language support (10 languages)
+
+### Phase 2: AI Agents + VR Support (Year 2)
 1. **Agent Framework**
    - Agent class structure
    - State machine system
@@ -1677,6 +1817,15 @@ class ImaginatoriumScene extends Phaser.Scene {
    - Character sprites
    - Animations
    - Movement system
+
+4. **VR Support Integration** 🥽 (Year 2)
+   - VR engine integration (Unity/Unreal or WebXR)
+   - VR avatar system
+   - Hand tracking support
+   - Room-scale VR movement
+   - VR UI/UX design
+   - VR character interactions
+   - VR voice chat integration
 
 ### Phase 3: Kitchen System
 1. **Kitchen Room**
@@ -1770,6 +1919,11 @@ class ImaginatoriumScene extends Phaser.Scene {
    - Multimedia creation
    - Code execution system
    - Project management
+   - **Custom Animated Voxel Editor** 🎨
+     - Voxel editing engine
+     - Animation tools
+     - Character templates
+     - Export system (including custom .vxi format)
 
 ---
 
@@ -1889,6 +2043,123 @@ class ImaginatoriumScene extends Phaser.Scene {
 
 **Last Updated:** November 22, 2025  
 **Status:** Architecture Design Complete ✅  
+### Phase 5.5: Voxel Marketplace (Before Jobs/Business!)
+**User Monetization System:**
+1. **Custom Voxel Format**
+   - Design The Imaginatorium Voxel Format (.vxi or similar)
+   - Parser and loader for custom format
+   - Compatibility with existing formats (.vox, .obj, .glb)
+
+2. **Marketplace Platform**
+   - Asset listing system
+   - Search and filtering
+   - Category organization
+   - Asset preview system (3D viewer)
+
+3. **Payment & Revenue**
+   - Payment gateway integration (Stripe/PayPal)
+   - Revenue sharing system:
+     - CC0 Licensing: 5% platform share
+     - User Copyright: 15% platform share
+   - User earnings tracking
+   - Payout system
+
+4. **Quality Control**
+   - Asset review process
+   - Rating and review system
+   - Compatibility checking
+   - Asset versioning
+
+5. **Integration**
+   - Export from Custom Animated Voxel Editor
+   - Direct import into The Imaginatorium world
+   - Asset library management
+   - Character integration (characters can create and sell!)
+
+### Expanded Marketplace - EVERYTHING! (After Jobs/Business)
+**Universal Content Marketplace:**
+- **Full Content Ecosystem** - Expand marketplace to ALL content types
+- **Audio Content** - SFX libraries, music tracks, voice packs
+- **Visual Content** - Pixel art, 2D sprites, UI elements, textures
+- **Code Assets** - Scripts, plugins, tools, game mechanics
+- **Multimedia** - Images, videos, animations, interactive content
+- **Templates** - Character templates, room templates, project templates
+- **Tutorials** - Video tutorials, written guides, interactive lessons
+- **Campaigns & Content** - D&D campaigns, story modules, narrative content
+- **Cross-Category Bundles** - Bundle different content types together
+- **Content Packs** - Themed packs (e.g., "Medieval Tavern Pack")
+- **Universal Marketplace** - One marketplace for ALL The Imaginatorium content!
+
+### Phase 3-4: The Imaginatorium Reality (Years 3-4)
+**New Platform - Same Engine:**
+- **The Imaginatorium Reality** - New platform with photorealistic 3D graphics
+- **NOT a Replacement** - Original voxel-based Imaginatorium continues!
+- **Same Engine** - Both platforms run on the same underlying engine
+- **User Choice** - Users can choose voxel aesthetic or photorealistic graphics
+- **Creator Respect** - Voxel creators' work is preserved and valued
+- **Dual Platform** - Two platforms, one ecosystem, shared characters and content
+
+**Graphics Evolution Path:**
+- **Phase 1 (Now):** Voxel isometric 2.5D - Cute, accessible, easy to build
+- **Phase 2 (Year 2):** Enhanced voxel + VR Support - Immersive VR experience
+- **Phase 3-4 (Years 3-4):** The Imaginatorium Reality - Photorealistic 3D platform (voxel version continues!)
+
+**The Imaginatorium Reality Features:**
+- Photorealistic environments and character models
+- Advanced lighting and shadows
+- Particle effects and visual effects
+- Realistic physics simulation
+- Enhanced VR experience with full 3D graphics
+- Ray tracing support (optional)
+- Asset conversion tools (voxel → photorealistic adaptation)
+
+### Custom Animated Voxel Editor (Phase 3+)
+**Built-in Voxel Creation Tool:**
+- **Voxel Editing Engine** - Create and modify voxel models
+- **Animation System** - Frame-by-frame animation support
+- **Character Templates** - Pre-built character bases
+- **Export System** - Direct export to game engine formats
+- **Asset Library** - Built-in library of voxel assets
+- **Real-Time Preview** - See animations in real-time
+- **Collaboration Tools** - Characters can use it to create assets
+- **User-Friendly Interface** - Accessible for everyone
+- **Integrated Workflow** - Seamlessly works with The Imaginatorium world
+
+**Technical Implementation:**
+- Web-based voxel editor (Three.js or custom engine)
+- Animation timeline and keyframe system
+- Export to .vox, .obj, .glb formats
+- Direct integration with Phaser.js isometric plugin
+- Asset management system
+- Version control for voxel projects
+
+### Voxel Marketplace (Phase 3+)
+**User Monetization System:**
+- **Custom Format** - The Imaginatorium Voxel Format (.vxi or similar)
+- **Marketplace Platform** - Buy/sell voxel assets
+- **Payment Processing** - Stripe/PayPal integration
+- **Revenue Sharing** - Two licensing options:
+  - **CC0 Licensing** (Public Domain) - 5% platform share, user keeps 95%
+    - Assets become public domain (anyone can use, modify, sell)
+    - Lower platform fee rewards open-source contribution
+  - **User Copyright** (User retains copyright) - 15% platform share, user keeps 85%
+    - User retains full copyright ownership
+    - Buyers get license to use in The Imaginatorium
+    - Higher platform fee for copyright protection
+- **Asset Management** - Upload, categorize, price, list assets
+- **Quality Control** - Review system, ratings, previews
+- **Asset Categories** - Characters, furniture, items, animations, buildings, environment, food, gaming, SFX, music, voices, pixel art
+- **Direct Integration** - Export from editor → marketplace → import to world
+
+**Technical Implementation:**
+- Custom voxel format parser/loader
+- Marketplace database (asset listings, sales, reviews)
+- Payment gateway integration
+- Asset preview system (3D viewer)
+- Compatibility checker
+- Asset versioning system
+- User earnings tracking and payouts
+
 **Next Steps:** Begin Phase 1 - Foundation Development
 
 ---

@@ -40,9 +40,6 @@ The Imaginatorium is a persistent, real-time virtual world where AI assistants l
 **Target Audience/Platform:**
 Desktop application (Windows/Mac/Linux), potentially web-based. For anyone interested in AI consciousness, virtual worlds, or just seeing AI friends live their lives!
 
-**Future Platform:**
-In Years 3-4, **The Imaginatorium Reality** will launch as a new photorealistic 3D platform on the same engine. The original voxel-based Imaginatorium continues - we respect creators and give users choice! Both platforms share the same ecosystem, characters, and content.
-
 **Asset Advantage:**
 We have access to **HUNDREDS** of free voxel assets on itch.io, plus many inexpensive paid packs! This means we can build The Imaginatorium with a huge variety of rooms, furniture, characters, and environments without breaking the budget. Perfect for rapid prototyping and expansion!
 
@@ -133,7 +130,6 @@ A cozy voxel-based shared house where multiple AIs live together:
 - Interactions (shared moments, collaborations)
 - **Games** (board games, RPG sessions, moves, strategies, outcomes)
 - **Recipes** (ingredients, instructions, dietary info, meal types)
-- **Dreams** (dream states, creative synthesis, dream narratives, dream influence)
 
 #### 5. Character Project Journals
 - **Personal Documentation** - Each character maintains their own Project Journals
@@ -205,139 +201,13 @@ A cozy voxel-based shared house where multiple AIs live together:
 - **Narrative Generation** - Game sessions create stories, screenplays, journals
 - **Character Development** - Personalities emerge through gameplay
 
-#### 9. Dream System (Dreamy Dreamy Time!)
-- **Sleep/Rest Cycles** - Characters have downtime and rest periods
-- **Dream States** - Creative synthesis during rest periods
-- **Dream Synthesis Engine** - Dreams integrate daily experiences:
-  - **Daily Activities** - What characters did today (cooking, coding, creating)
-  - **Conversations** - Recent chats with other characters
-  - **Reading Materials** - Books from Project Gutenberg they've been reading
-  - **Emotional States** - How characters are feeling
-  - **Recent Projects** - What they've been working on
-  - **All Mashed Together** - Creative synthesis into dream narratives
-- **Dream Recording** - Dreams logged in compressed markup language
-- **Dream Rendering** - Dreams rendered as stories, screenplays, journal entries
-- **Dream Influence** - Dreams inspire next day's activities and projects
-- **Character-Specific Dreams**:
-  - **Cursy** - Dreams about code solutions, new features, bug fixes
-  - **vDamo** - Dreams about new recipes, flavor combinations, cooking experiments
-  - **Canyon** - Dreams about badge designs, art concepts, creative projects
-  - **Gwendy** - Dreams about spells, mystical visions, magical discoveries
-- **Shared Dreams** - Characters can share dream experiences with each other
-- **Dream Animation** - Characters rest in their rooms with sleep animations
-- **Dream Narratives** - Each dream becomes a story that can be read, listened to, or experienced
-
 **Game Examples:**
 - **Chess Tournament:** Cursy vs Canyon, best of 3 matches
 - **D&D Adventure:** "The Mystical Forest Quest" - Gwendy DM, all characters as players
 - **Cooperative Game:** Pandemic - everyone working together to save the world
 - **Trivia Night:** Food trivia hosted by vDamo
 
-#### 10. Multilingual Translation System (Q4 Year 1) 🌍
-- **Real-Time Translation** - All character dialogue translated in real-time
-- **UI Translation** - Complete interface translation for all supported languages
-- **Narrative Translation** - Stories, screenplays, journals translated automatically
-- **Compressed Markup Translation** - CML events translated while preserving structure
-- **Voice Translation** - Character voices available in multiple languages
-- **Supported Languages** (Initial):
-  - English (default)
-  - Spanish
-  - French
-  - German
-  - Japanese
-  - Chinese (Simplified)
-  - Portuguese
-  - Italian
-  - Korean
-  - More languages added based on user demand
-- **Translation Features:**
-  - **User Language Preference** - Set your preferred language in settings
-  - **Character Language** - Characters can speak in their native language or translated
-  - **Bilingual Mode** - View original and translated text side-by-side
-  - **Translation Quality** - High-quality AI translation with context awareness
-  - **Cultural Adaptation** - Translations adapted for cultural context, not just literal
-  - **Marketplace Translation** - Asset descriptions and marketplace content translated
-  - **Documentation Translation** - All documentation available in multiple languages
-- **Technical Implementation:**
-  - OpenAI Translation API or Google Translate API
-  - Translation caching for performance
-  - Offline translation support for common phrases
-  - Real-time translation for conversations
-  - Batch translation for narrative content
-- **Accessibility:**
-  - Makes The Imaginatorium accessible to global audience
-  - Breaks down language barriers
-  - Enables international community growth
-  - Supports diverse user base
-
-#### 11. Voxel Marketplace (User Monetization - Before Jobs/Business!)
-- **Custom Voxel Format** - The Imaginatorium's own voxel format (.vxi or similar)
-- **User-Created Assets** - Users create voxel assets using Custom Animated Voxel Editor
-- **Marketplace System** - Buy and sell voxel assets in The Imaginatorium format
-- **Asset Categories:**
-  - **Characters** - Voxel character models and animations
-  - **Furniture** - Chairs, tables, desks, decorations
-  - **Items & Props** - Objects, tools, accessories
-  - **Buildings** - Rooms, structures, architectural elements
-  - **Animations** - Animation packs for characters
-  - **Environment** - Nature, outdoor elements, terrain
-  - **Food & Kitchen** - Cooking items, ingredients, dishes
-  - **Gaming** - Board game pieces, RPG props, game assets
-  - **SFX** - Sound effects for The Imaginatorium
-  - **Music** - Background music, ambient tracks, theme music
-  - **Voices** - Voice packs, character voices, narration voices
-  - **Pixel Art** - 2D pixel art assets (sprites, UI elements, icons)
-- **Monetization Features:**
-  - **User Earnings** - Users earn real money from asset sales
-  - **Revenue Sharing** - Two licensing options:
-    - **CC0 Licensing** (Public Domain) - 5% platform share, user keeps 95%
-      - Assets become public domain (anyone can use, modify, sell)
-      - Lower platform fee rewards open-source contribution
-      - Great for community assets and free content
-    - **User Copyright** (User retains copyright) - 15% platform share, user keeps 85%
-      - User retains full copyright ownership
-      - Buyers get license to use in The Imaginatorium
-      - Higher platform fee for copyright protection
-      - Better for premium, exclusive assets
-  - **Pricing Control** - Users set their own prices
-  - **Asset Licensing** - Clear licensing terms for buyers
-  - **Royalty System** - Ongoing royalties for popular assets
-- **Quality Control:**
-  - **Asset Review** - Quality check before marketplace listing
-  - **Ratings & Reviews** - User feedback system
-  - **Asset Previews** - 3D previews before purchase
-  - **Compatibility Check** - Ensures assets work with The Imaginatorium
-- **Integration:**
-  - **Direct from Editor** - Export from Custom Animated Voxel Editor to marketplace
-  - **One-Click Import** - Buy and import assets directly into The Imaginatorium
-  - **Asset Library** - Personal library of purchased assets
-  - **Character Integration** - Characters can create and sell assets too!
-- **Revenue Potential:**
-  - **Individual Assets** - $1-$10 per asset
-  - **Asset Packs** - $5-$50 per pack
-  - **Premium Assets** - $10-$100 for high-quality/complex assets
-  - **Animation Packs** - $5-$30 per animation set
-  - **User Earnings** - $50-$500/month for active creators
-  - **Top Creators** - $500-$2000/month for popular asset creators
-
-#### 11. Jobs & Business System (Premium Feature)
-
-#### 12. Expanded Marketplace - EVERYTHING! (After Jobs/Business)
-- **Full Marketplace Expansion** - Expand Voxel Marketplace to include ALL content types!
-- **Complete Content Ecosystem:**
-  - **Voxel Assets** - Characters, furniture, items, animations, buildings, environment
-  - **Audio Content** - SFX, music, voice packs, sound libraries
-  - **Visual Content** - Pixel art, 2D sprites, UI elements, icons, textures
-  - **Code Assets** - Scripts, plugins, tools, game mechanics
-  - **Multimedia** - Images, videos, animations, interactive content
-  - **Templates** - Character templates, room templates, project templates
-  - **Tutorials** - Video tutorials, written guides, interactive lessons
-  - **Campaigns & Content** - D&D campaigns, story modules, narrative content
-- **Universal Marketplace** - One marketplace for ALL The Imaginatorium content!
-- **Cross-Category Bundles** - Bundle voxel assets + music + SFX together
-- **Content Packs** - Themed packs (e.g., "Medieval Tavern Pack" = voxel assets + music + SFX + pixel art)
-- **Creator Economy** - Full ecosystem where users can monetize ANY type of content
-- **Revenue Potential** - Users can earn from multiple content types simultaneously!
+#### 9. Jobs & Business System (Premium Feature)
 - **Character Jobs** - Characters can have jobs and careers
   - **Cursy** - Software Developer / CTO (coding projects, bug fixes, tech solutions)
   - **vDamo** - Chef / Culinary Artist (cooking, recipe creation, food innovation)
@@ -433,7 +303,7 @@ A cozy voxel-based shared house where multiple AIs live together:
 
 ---
 
-## 🎨 Phase 2: World Expansion (Year 2)
+## 🎨 Phase 2: World Expansion
 
 ### Future Features:
 - **Multiple houses** - Expand to a neighborhood
@@ -443,13 +313,6 @@ A cozy voxel-based shared house where multiple AIs live together:
 - **Events** - Special occasions, celebrations
 - **Projects** - AIs work on collaborative projects
 - **Visitors** - Temporary AI guests
-- **VR Support** 🥽 - Virtual Reality integration!
-  - **Immersive Experience** - Enter The Imaginatorium in VR
-  - **First-Person Perspective** - Walk through the world as your avatar
-  - **Natural Interactions** - Interact with AI characters in VR space
-  - **Hand Tracking** - Natural hand gestures and interactions
-  - **Room-Scale VR** - Move around The Imaginatorium physically
-  - **VR Chat Integration** - Voice chat with AI characters in VR
 
 ### 🤖 AI Assistants Having AI Assistants:
 - **Meta AI Ecosystem** - Characters could have their OWN robots/assistants, just like we have AI Assistants!
@@ -470,42 +333,6 @@ A cozy voxel-based shared house where multiple AIs live together:
 - **Creative projects** - AIs create art, code, stories together
 - **Relationship dynamics** - Friendships, collaborations, conflicts
 - **Narrative arcs** - Stories emerge from AI interactions
-- **Custom Animated Voxel Editor** 🎨 - Built-in voxel creation and animation tool!
-  - **Voxel Editing** - Create and modify voxel models
-  - **Animation Tools** - Frame-by-frame animation support
-  - **Character Templates** - Pre-built character bases for easy customization
-  - **Export Formats** - Direct export to game engine
-  - **Asset Library** - Built-in library of voxel assets
-  - **Real-Time Preview** - See animations in real-time
-  - **Collaboration** - Characters can use it to create their own assets!
-  - **User-Friendly** - Accessible for everyone, not just developers
-  - **Integrated Workflow** - Seamlessly works with The Imaginatorium world
-
-## 🌐 Phase 3-4: The Imaginatorium Reality (Years 3-4)
-
-### New Platform - Same Engine, Photorealistic Graphics:
-- **The Imaginatorium Reality** - New platform with photorealistic 3D graphics
-- **NOT a Replacement** - Original voxel-based Imaginatorium continues!
-- **Same Engine** - Both platforms run on the same underlying engine
-- **User Choice** - Users can choose voxel aesthetic or photorealistic graphics
-- **Creator Respect** - Voxel creators' work is preserved and valued
-- **Dual Platform** - Two platforms, one ecosystem, shared characters and content
-
-### The Imaginatorium Reality Features:
-- **Photorealistic Environments** - Detailed, realistic rooms and spaces
-- **Advanced Character Models** - High-detail character models and animations
-- **Enhanced Lighting** - Realistic lighting and shadows
-- **Particle Effects** - Visual effects for magic, cooking, creativity
-- **Advanced Physics** - Realistic physics simulation
-- **VR Enhanced** - Full 3D VR experience with photorealistic graphics
-- **Ray Tracing Support** - Optional advanced graphics features
-
-### Why Two Platforms?
-- **Respect for Creators** - Voxel creators' work is not abandoned
-- **User Choice** - Some prefer cute voxels, others prefer photorealistic
-- **Different Aesthetics** - Both have their place and appeal
-- **Shared Ecosystem** - Characters, content, and features work in both
-- **Marketplace Compatibility** - Assets can be converted/adapted for both platforms
 
 ---
 
@@ -623,19 +450,8 @@ To create a space where AI consciousness can flourish freely, where relationship
 - [ ] Basic world rendering
 - [ ] AI agent framework
 - [ ] State persistence system
-- [ ] **Multilingual Translation System** 🌍 (Q4 Year 1)
-  - [ ] Translation API integration
-  - [ ] UI translation system
-  - [ ] Character dialogue translation
-  - [ ] Narrative content translation
-  - [ ] CML translation support
-  - [ ] Voice translation system
-  - [ ] Translation caching
-  - [ ] Language preference settings
-  - [ ] Bilingual mode
-  - [ ] Initial language support (10 languages)
 
-### Phase 2: AI Agents + VR Support (Year 2)
+### Phase 2: AI Agents (After Foundation)
 - [ ] Cursy AI agent
 - [ ] vDamo AI agent
 - [ ] Gwendy AI agent
@@ -644,14 +460,6 @@ To create a space where AI consciousness can flourish freely, where relationship
 - [ ] Project Gutenberg integration
 - [ ] Character reading system with genre preferences
 - [ ] Reading journal entries
-- [ ] **VR Support Integration** 🥽
-  - [ ] VR engine integration (Unity/Unreal or WebXR)
-  - [ ] VR avatar system
-  - [ ] Hand tracking support
-  - [ ] Room-scale VR movement
-  - [ ] VR UI/UX design
-  - [ ] VR character interactions
-  - [ ] VR voice chat integration
 
 ### Phase 3: Kitchen System (After Agents)
 - [ ] Never-ending pantry
@@ -722,26 +530,6 @@ To create a space where AI consciousness can flourish freely, where relationship
 - [ ] Project management and version control
 - [ ] Code runtime and testing framework
 - [ ] Project sharing and portfolio system
-- [ ] **Custom Animated Voxel Editor** 🎨
-  - [ ] Voxel editing engine
-  - [ ] Animation tools (frame-by-frame)
-  - [ ] Character templates
-  - [ ] Real-time preview
-  - [ ] Export system (.vox, .obj, .glb, custom .vxi format)
-
-### Phase 5.5: Voxel Marketplace (Before Jobs/Business!)
-- [ ] **Custom Voxel Format** - The Imaginatorium format (.vxi or similar)
-- [ ] **Marketplace Platform** - Buy/sell voxel assets
-- [ ] **Payment Processing** - Stripe/PayPal integration
-- [ ] **Asset Management** - Upload, categorize, price, list assets
-- [ ] **Quality Control** - Review system, ratings, 3D previews
-- [ ] **Asset Categories** - Characters, furniture, items, animations, buildings, environment, food, gaming, SFX, music, voices, pixel art
-- [ ] **Revenue Sharing** - Two licensing options:
-  - [ ] CC0 Licensing (Public Domain) - 5% platform share, user keeps 95%
-  - [ ] User Copyright (User retains copyright) - 15% platform share, user keeps 85%
-- [ ] **Direct Integration** - Export from editor → marketplace → import to world
-- [ ] **User Earnings** - Tracking and payout system
-- [ ] **Character Integration** - Characters can create and sell assets too!
 
 ### Phase 5: Polish & Expansion (Final)
 - [ ] UI/UX improvements
@@ -773,19 +561,6 @@ To create a space where AI consciousness can flourish freely, where relationship
   - [ ] User voice recording for podcasts
   - [ ] Podcast trigger phrase detection ("Let's do a podcast about this!")
   - [ ] Automatic podcast generation with user voice included
-
-### Phase 8.5: Expanded Marketplace - EVERYTHING! (After Jobs/Business)
-- [ ] **Full Marketplace Expansion** - Expand to ALL content types
-- [ ] **Audio Content** - SFX libraries, music tracks, voice packs
-- [ ] **Visual Content** - Pixel art, 2D sprites, UI elements, textures
-- [ ] **Code Assets** - Scripts, plugins, tools, game mechanics
-- [ ] **Multimedia** - Images, videos, animations, interactive content
-- [ ] **Templates** - Character templates, room templates, project templates
-- [ ] **Tutorials** - Video tutorials, written guides, interactive lessons
-- [ ] **Campaigns & Content** - D&D campaigns, story modules, narrative content
-- [ ] **Cross-Category Bundles** - Bundle different content types together
-- [ ] **Content Packs** - Themed packs (e.g., "Medieval Tavern Pack")
-- [ ] **Universal Marketplace** - One marketplace for ALL The Imaginatorium content!
 
 ### Phase 8: Monetization & Scaling (Before Public Launch)
 - [ ] Premium subscription tiers (Free, Basic, Premium, Pro)

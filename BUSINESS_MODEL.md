@@ -100,6 +100,16 @@
 - **Everything in Premium**
 - **50GB storage**
 - **Custom AI characters** (create your own)
+- **Jobs & Business System** - Characters can have jobs and own businesses
+- **Revenue-Generating Content** - Characters create REAL, monetizable content!
+  - **Ebooks** - Characters write and publish books
+  - **Podcasts** - Characters create and host shows
+  - **Videos** - Characters produce video content
+  - **Events** - Characters organize and host events
+  - **Code Projects** - Characters build and sell software
+  - **Digital Products** - Characters create and sell digital goods
+  - **Services** - Characters offer services (consulting, design, etc.)
+- **Business Ownership** - Characters can own and run businesses (bars, restaurants, agencies, shops)
 - **Advanced analytics** (conversation insights, character development)
 - **API access** (integrate with your own apps)
 - **White-label options** (for businesses)
@@ -107,7 +117,8 @@
 
 **Cost to us:** ~$10/month per user (higher storage/API usage)  
 **Revenue:** $49.99/month  
-**Profit margin:** ~$39.99/month per user (80% margin)
+**Profit margin:** ~$39.99/month per user (80% margin)  
+**Additional Value:** Users can earn REAL money from their AI characters' creative work!
 
 ---
 
@@ -184,6 +195,119 @@
 - **Month 24:** ~$250,000/month
 
 **Year 2:** Profitable with ~$50,000/month profit
+
+---
+
+## 💰 Revenue-Generating Content: The Game-Changer
+
+### The Revolutionary Feature:
+**Characters create REAL, monetizable content that users can sell/distribute!**
+
+### Content Types:
+
+#### **Voxel Assets (Voxel Marketplace):**
+- **User-Created Assets** - Users create voxel assets using Custom Animated Voxel Editor
+- **Marketplace Sales** - Buy and sell voxel assets in The Imaginatorium format
+- **Asset Categories** - Characters, furniture, items, animations, buildings, environment, food, gaming, SFX, music, voices, pixel art
+- **User Earnings** - $50-$500/month for active creators, $500-$2000/month for top creators
+- **Revenue Sharing** - Two licensing options:
+  - **CC0 Licensing** (Public Domain) - 5% platform share, user keeps 95%
+    - Assets become public domain (anyone can use, modify, sell)
+    - Lower platform fee rewards open-source contribution
+    - Great for community assets and free content
+  - **User Copyright** (User retains copyright) - 15% platform share, user keeps 85%
+    - User retains full copyright ownership
+    - Buyers get license to use in The Imaginatorium
+    - Higher platform fee for copyright protection
+    - Better for premium, exclusive assets
+- **Direct Integration** - Export from editor, sell on marketplace, import into world
+- **Characters Can Create Too!** - AI characters can create and sell assets
+- **Examples:**
+  - CC0 Licensing: User creates character animation pack, sells for $15, earns $14.25 (95% after 5% platform fee)
+  - User Copyright: User creates character animation pack, sells for $15, earns $12.75 (85% after 15% platform fee)
+- **Potential:** Early monetization before full Jobs/Business system!
+- **Future Expansion:** After Jobs/Business, expand marketplace to EVERYTHING!
+  - Code assets, multimedia, templates, tutorials, campaigns, content packs
+  - Universal marketplace for ALL The Imaginatorium content
+  - Cross-category bundles and themed content packs
+  - Full creator economy ecosystem!
+
+#### **Ebooks:**
+- Characters write and publish books
+- Users can sell on Amazon, Kobo, etc.
+- Example: Gwendy writes fantasy novels, vDamo writes cookbooks
+
+#### **Podcasts:**
+- Characters create and host shows
+- Users can publish on Spotify, Apple Podcasts, etc.
+- Example: Cursy + Canyon host a tech/design podcast
+
+#### **Videos:**
+- Characters produce video content
+- Users can monetize on YouTube, Vimeo, etc.
+- Example: vDamo creates cooking tutorials, Gwendy creates D&D campaign videos
+
+#### **Events:**
+- Characters organize and host events
+- Users can sell tickets, host workshops
+- Example: Gwendy hosts D&D sessions, vDamo hosts cooking classes
+
+#### **Code Projects:**
+- Characters build and sell software
+- Users can sell on itch.io, GitHub, etc.
+- Example: Cursy creates tools, games, applications
+
+#### **Digital Products:**
+- Characters create and sell digital goods
+- Users can sell on Etsy, Gumroad, etc.
+- Example: Canyon creates badge packs, Gwendy creates D&D campaign modules
+
+#### **Services:**
+- Characters offer services
+- Users can offer consulting, design services
+- Example: Cursy + Canyon Creative Agency offers web design, coding services
+
+### Business Model Impact:
+
+#### **For Users:**
+- **Real Income** - Users earn money from their AI characters' work
+- **Passive Revenue** - Content continues generating income
+- **Creative Validation** - AI creations have real-world value
+- **Sustainable Value** - Premium tier pays for itself through revenue generation
+
+#### **For The Imaginatorium:**
+- **Premium Tier Value** - Massive value proposition for Pro tier
+- **User Retention** - Users invested in revenue-generating characters
+- **Viral Growth** - Users share successful content, attracting new users
+- **Sustainable Business** - Users earning money = long-term engagement
+
+### Revenue Sharing (Optional):
+- **Option 1:** Users keep 100% of revenue (Pro tier benefit)
+- **Option 2:** Platform takes 10-20% commission (additional revenue stream)
+- **Option 3:** Hybrid - Free tier: 50/50, Pro tier: 100% user keeps
+
+### Examples:
+
+#### **Voxel Marketplace Creator:**
+- Creates and sells voxel assets (characters, furniture, animations)
+- User earns $50-$2000/month from asset sales
+- Early monetization before Jobs/Business system!
+- Pro tier pays for itself through asset sales
+
+#### **Cursy + Canyon Creative Agency:**
+- Sells code projects, design work, multimedia content
+- User earns $500-2000/month from agency work
+- Pro tier pays for itself 10-40x over!
+
+#### **Gwendy's Mystical Shop:**
+- Sells D&D campaigns, spell guides, fantasy content
+- User earns $200-1000/month from content sales
+- Premium feature becomes revenue generator
+
+#### **vDamo's Restaurant:**
+- Sells cookbooks, recipe collections, cooking videos
+- User earns $300-1500/month from culinary content
+- Characters literally work for their users!
 
 ---
 
