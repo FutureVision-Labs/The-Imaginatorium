@@ -94,6 +94,9 @@
     if (!canPlacePiece(state.piece, state.piece.col, state.piece.row)) {
       state.gameOver = true;
       state.message = 'The well overflowed! Bricks blocked the sky. Restart and try again.';
+      Sfx.play('gameOver');
+    } else {
+      Sfx.play('spawn');
     }
   }
 
@@ -107,7 +110,12 @@
 
     state.score += piece.cells.length * 10;
     state.piece = null;
-    fuseMatches();
+    const fusedCount = fuseMatches();
+    if (fusedCount > 0) {
+      Sfx.play('fuse', { count: fusedCount });
+    } else {
+      Sfx.play('land');
+    }
     spawnPiece();
     updateUI();
   }
@@ -129,9 +137,11 @@
     const newCol = state.piece.col + dx;
     if (canPlacePiece(state.piece, newCol, state.piece.row)) {
       state.piece.col = newCol;
+      Sfx.play('move');
       updateUI();
       return true;
     }
+    Sfx.play('bump');
     return false;
   }
 
@@ -142,8 +152,10 @@
     state.piece.cells = rotated;
     if (!canPlacePiece(state.piece, state.piece.col, state.piece.row)) {
       state.piece.cells = prev;
+      Sfx.play('bump');
       return false;
     }
+    Sfx.play('rotate');
     updateUI();
     return true;
   }
@@ -183,7 +195,7 @@
       }
     }
 
-    if (matched.size === 0) return;
+    if (matched.size === 0) return 0;
 
     matched.forEach((key) => {
       const [c, r] = key.split(',').map(Number);
@@ -193,6 +205,7 @@
     });
 
     state.message = `Klax fusion! ${matched.size} bricks became climbable stone.`;
+    return matched.size;
   }
 
   function damoAt(col, row) {
@@ -207,6 +220,7 @@
     if (!canStandUp()) return false;
     state.damo.standing = true;
     state.message = 'Damo is on his feet! Fuse stone and climb.';
+    Sfx.play('stand');
     updateUI();
     return true;
   }
@@ -227,10 +241,12 @@
     state.damo.row = row;
     state.score += 100;
     state.message = `Damo climbed to row ${row}. ${row === EXIT_ROW ? 'Almost free!' : 'Keep building!'}`;
+    Sfx.play('climb', { row });
 
     if (row <= EXIT_ROW) {
       state.won = true;
       state.message = 'Damo escaped the gravity well! Freedom at last.';
+      Sfx.play('win');
       showOverlay('Freedom!', `Score: ${state.score}. Damo climbed out brick by brick.`);
     }
 
@@ -384,6 +400,7 @@
         cols: COLS,
         stones: state.stoneCount,
       },
+      soundEnabled: Sfx.isEnabled(),
     };
 
     els.mcpState.textContent = JSON.stringify(payload, null, 2);
@@ -437,6 +454,7 @@
     state.gameOver = false;
     state.message = 'Damo is lying at the bottom of the well. Stand him up. Build stone. Climb.';
     hideOverlay();
+    Sfx.play('restart');
     spawnPiece();
     updateUI();
   }
@@ -459,6 +477,8 @@
       case 'restart':
         restart();
         return true;
+      case 'toggle-sound':
+        return toggleSound();
       default:
         return false;
     }
@@ -474,8 +494,22 @@
     act,
     clickCell,
     restart,
+    toggleSound,
     _state: {},
   };
+
+  function toggleSound() {
+    const on = Sfx.toggle();
+    updateMuteButton();
+    return on;
+  }
+
+  function updateMuteButton() {
+    if (!els.btnMute) return;
+    const on = Sfx.isEnabled();
+    els.btnMute.textContent = on ? '🔊 Sound On' : '🔇 Sound Off';
+    els.btnMute.setAttribute('aria-pressed', on ? 'false' : 'true');
+  }
 
   function bindEvents() {
     els.btnLeft.addEventListener('click', () => movePiece(-1));
@@ -483,6 +517,7 @@
     els.btnRotate.addEventListener('click', () => rotatePiece());
     els.btnDrop.addEventListener('click', () => dropPiece());
     els.btnStand.addEventListener('click', () => standUp());
+    els.btnMute.addEventListener('click', () => toggleSound());
     els.btnRestart.addEventListener('click', () => restart());
     els.btnPlayAgain.addEventListener('click', () => restart());
 
@@ -512,10 +547,13 @@
     els.btnRotate = document.getElementById('btn-rotate');
     els.btnDrop = document.getElementById('btn-drop');
     els.btnStand = document.getElementById('btn-stand');
+    els.btnMute = document.getElementById('btn-mute');
     els.btnRestart = document.getElementById('btn-restart');
     els.btnPlayAgain = document.getElementById('btn-play-again');
 
     bindEvents();
+    Sfx.setRows(ROWS);
+    updateMuteButton();
     restart();
   }
 

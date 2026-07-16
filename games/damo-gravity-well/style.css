@@ -175,6 +175,15 @@ button:disabled {
   cursor: not-allowed;
 }
 
+#btn-mute {
+  background: linear-gradient(135deg, #7b8cff, #b8c0ff);
+}
+
+#btn-mute[aria-pressed="true"] {
+  background: linear-gradient(135deg, #555, #777);
+  color: #ddd;
+}
+
 #btn-restart,
 #btn-play-again {
   background: linear-gradient(135deg, var(--accent-3), #ff9f1c);
