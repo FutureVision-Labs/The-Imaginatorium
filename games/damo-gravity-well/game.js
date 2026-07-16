@@ -10,7 +10,6 @@
   const COLS = 8;
   const ROWS = 16;
   const EXIT_ROW = 0;
-  const SLICE_ANGLE = 360 / COLS;
   const COLORS = ['red', 'blue', 'yellow', 'green', 'purple', 'cyan'];
   const MATCH_MIN = 3;
 
@@ -36,13 +35,20 @@
     dropAnim: null,
     landPopCells: null,
     inputLocked: false,
-    wellRotation: 0,
+    damoWalkAnim: false,
   };
 
   const CELL_STEP = () => {
     const size = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--cell-size'), 10) || 42;
     return size + 2;
   };
+
+  function colOffsetFromDamo(col) {
+    let d = col - state.damo.col;
+    while (d > COLS / 2) d -= COLS;
+    while (d < -COLS / 2) d += COLS;
+    return d;
+  }
 
   function wrapCol(col) {
     return ((col % COLS) + COLS) % COLS;
@@ -316,7 +322,11 @@
       return false;
     }
     state.damo.col = newCol;
-    state.wellRotation = -state.damo.col * SLICE_ANGLE;
+    state.damoWalkAnim = true;
+    setTimeout(() => {
+      state.damoWalkAnim = false;
+      if (!state.dropAnim) updateUI();
+    }, 280);
     Sfx.play('move');
     state.message = `Damo walks the inner wall… slice ${newCol + 1} of ${COLS}`;
     updateUI();
@@ -376,7 +386,7 @@
   function standUp() {
     if (!canStandUp()) return false;
     state.damo.standing = true;
-    state.message = 'Damo is on his feet! Walk the well wall. Build ledges. Jump up.';
+    state.message = 'Damo is on his feet! Tap ◀ Walk ▶ — the well spins around you.';
     Sfx.play('stand');
     updateUI();
     return true;
@@ -395,15 +405,9 @@
     if (!isClimbableTarget(col, row)) return false;
     state.damo.col = wrapCol(col);
     state.damo.row = row;
-    state.wellRotation = -state.damo.col * SLICE_ANGLE;
     state.score += 100;
     state.message = `Damo jumped to ledge ${row + 1}. ${row === EXIT_ROW ? 'Almost free!' : 'Keep circling upward!'}`;
     Sfx.play('climb', { row });
-
-    if (els.damoAnchor) {
-      els.damoAnchor.classList.add('jump-anim');
-      setTimeout(() => els.damoAnchor && els.damoAnchor.classList.remove('jump-anim'), 340);
-    }
 
     if (row <= EXIT_ROW) {
       state.won = true;
@@ -451,10 +455,7 @@
     const key = `${c},${r}`;
     const data = state.grid[r][c];
     const isActive = activeCells.has(key);
-
-    if (c === state.damo.col && r === state.damo.row) {
-      cell.classList.add('damo-here');
-    }
+    const isDamoHere = state.damo.col === c && state.damo.row === r;
 
     if (data && !isActive) {
       cell.classList.add(data.type);
@@ -491,21 +492,23 @@
       }));
     }
 
+    if (isDamoHere) {
+      cell.classList.add('damo');
+      const sprite = document.createElement('span');
+      sprite.className = `damo-sprite ${state.damo.standing ? 'standing' : 'prone'}`;
+      if (state.damoWalkAnim) sprite.classList.add('walk-bob');
+      sprite.textContent = state.damo.standing ? '🧍' : '🛌';
+      sprite.setAttribute('aria-hidden', 'true');
+      cell.appendChild(sprite);
+    }
+
     cell.addEventListener('click', () => onCellClick(c, r));
     return cell;
   }
 
-  function updateDamoAnchor() {
-    if (!els.damoAnchor) return;
-    const top = 10 + state.damo.row * CELL_STEP();
-    els.damoAnchor.style.top = `${top}px`;
-    els.damoAnchor.textContent = state.damo.standing ? '🧍' : '🛌';
-    els.damoAnchor.className = `damo-anchor ${state.damo.standing ? 'standing' : 'prone'}`;
-  }
-
   function buildGrid() {
     els.wellGrid.innerHTML = '';
-    els.wellGrid.className = 'well-cylinder-stage';
+    els.wellGrid.className = 'well-flat-stage';
 
     const ghost = state.dropAnim ? null : getGhostLanding();
     const ghostSet = new Set((ghost || []).map(([c, r]) => `${c},${r}`));
@@ -520,30 +523,30 @@
       landPopCells: state.landPopCells,
     };
 
-    const ring = document.createElement('div');
-    ring.className = 'well-cylinder-ring';
-    ring.style.setProperty('--ring-rotation', `${-state.damo.col * SLICE_ANGLE}deg`);
+    const pan = document.createElement('div');
+    pan.className = 'well-pan-track';
+
+    const cellStep = CELL_STEP();
+    const viewportCols = 5;
+    const panX = (viewportCols * cellStep) / 2 - (state.damo.col + 0.5) * cellStep;
+    pan.style.transform = `translateX(${panX}px)`;
 
     for (let c = 0; c < COLS; c += 1) {
-      const slice = document.createElement('div');
-      slice.className = 'well-slice';
-      if (c === state.damo.col) slice.classList.add('is-front');
-      slice.style.setProperty('--slice-index', String(c));
-      slice.dataset.col = String(c);
-
-      const stack = document.createElement('div');
-      stack.className = 'well-slice-stack';
+      const column = document.createElement('div');
+      column.className = 'well-column';
+      const offset = colOffsetFromDamo(c);
+      column.classList.add(`well-column-offset-${offset}`);
+      if (c === state.damo.col) column.classList.add('is-under-damo');
+      column.dataset.col = String(c);
 
       for (let r = 0; r < ROWS; r += 1) {
-        stack.appendChild(createWellCell(c, r, context));
+        column.appendChild(createWellCell(c, r, context));
       }
 
-      slice.appendChild(stack);
-      ring.appendChild(slice);
+      pan.appendChild(column);
     }
 
-    els.wellGrid.appendChild(ring);
-    updateDamoAnchor();
+    els.wellGrid.appendChild(pan);
 
     const lockControls = state.inputLocked || state.won || state.gameOver;
     [els.btnLeft, els.btnRight, els.btnRotate, els.btnDrop].forEach((btn) => {
@@ -607,6 +610,8 @@
 
     els.btnStand.disabled = !canStandUp() || state.won;
 
+    document.body.classList.toggle('damo-can-walk', state.damo.standing && !state.won && !state.gameOver);
+
     publishMcpState();
   }
 
@@ -626,7 +631,6 @@
       stoneCount: state.stoneCount,
       message: state.message,
       damo: { ...state.damo },
-      wellRotation: state.wellRotation,
       walkable: getWalkableCols(),
       piece: state.piece
         ? { name: state.piece.name, color: state.piece.color, col: state.piece.col, row: state.piece.row }
@@ -682,10 +686,25 @@
     if (state.won || state.inputLocked) return;
     Music.unlock();
     Sfx.unlock();
+
     if (isClimbableTarget(col, row)) {
       climbTo(col, row);
       return;
     }
+
+    if (state.damo.standing && row === state.damo.row && col !== state.damo.col) {
+      const rightCol = wrapCol(state.damo.col + 1);
+      const leftCol = wrapCol(state.damo.col - 1);
+      if (col === rightCol) {
+        walkDamo(1);
+        return;
+      }
+      if (col === leftCol) {
+        walkDamo(-1);
+        return;
+      }
+    }
+
     dropInColumn(col);
   }
 
@@ -710,8 +729,8 @@
     state.dropAnim = null;
     state.landPopCells = null;
     state.inputLocked = false;
-    state.wellRotation = 0;
-    state.message = 'Damo is lying at the bottom of the well. Stand up. Walk the wall. Build ledges.';
+    state.damoWalkAnim = false;
+    state.message = 'Damo is lying at the bottom of the well. Tap Stand Up, then Walk the wall.';
     hideOverlay();
     Sfx.play('restart');
     if (Music.isEnabled()) Music.start();
@@ -831,7 +850,6 @@
 
   function init() {
     els.wellGrid = document.getElementById('well-grid');
-    els.damoAnchor = document.getElementById('damo-anchor');
     els.statusText = document.getElementById('status-text');
     els.scoreValue = document.getElementById('score-value');
     els.stoneValue = document.getElementById('stone-value');
