@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Damo is Trapped in a Gravity Well</title>
+  <meta name="description" content="Point-and-click climb game. Stack bricks Tetris-style, fuse Klax matches, help Damo escape the gravity well. MCP-accessible for Agentics.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" data-game="damo-gravity-well">
+    <header class="header">
+      <h1>Damo is Trapped in a Gravity Well</h1>
+      <p class="tagline">Tetris meets Klax. Brick by brick. Climb to freedom.</p>
+    </header>
+
+    <main class="layout">
+      <aside class="panel panel-left" aria-label="Game status">
+        <section class="stat-block">
+          <h2>Status</h2>
+          <p id="status-text" aria-live="polite" data-mcp="status">Damo is lying at the bottom of the well...</p>
+        </section>
+
+        <section class="stat-block">
+          <h2>Progress</h2>
+          <div class="progress-bar" aria-hidden="true">
+            <div id="climb-progress" class="progress-fill"></div>
+          </div>
+          <p><span id="height-label">Depth</span>: <strong id="height-value" data-mcp="depth">15</strong> bricks to freedom</p>
+          <p>Score: <strong id="score-value" data-mcp="score">0</strong></p>
+          <p>Fused stone: <strong id="stone-value" data-mcp="stone-count">0</strong></p>
+        </section>
+
+        <section class="stat-block">
+          <h2>Damo</h2>
+          <div id="damo-portrait" class="damo-portrait prone" data-mcp="damo-pose">🛌</div>
+          <p id="damo-state" data-mcp="damo-state">Prone — stand up first!</p>
+        </section>
+
+        <section class="stat-block controls" aria-label="Damo actions">
+          <h2>Actions</h2>
+          <button type="button" id="btn-stand" data-action="stand-up" data-mcp-action="stand-up" disabled>Stand Up</button>
+          <button type="button" id="btn-restart" data-action="restart" data-mcp-action="restart">Restart</button>
+        </section>
+      </aside>
+
+      <section class="well-wrap" aria-label="Gravity well playfield">
+        <div class="conveyor" aria-label="Incoming bricks">
+          <span class="conveyor-label">Incoming</span>
+          <div id="next-preview" class="next-preview" data-mcp="next-piece"></div>
+        </div>
+
+        <div class="piece-controls" aria-label="Piece controls">
+          <button type="button" id="btn-left" data-action="move-left" data-mcp-action="move-left" title="Shift piece left">◀</button>
+          <button type="button" id="btn-rotate" data-action="rotate" data-mcp-action="rotate" title="Rotate piece">↻</button>
+          <button type="button" id="btn-right" data-action="move-right" data-mcp-action="move-right" title="Shift piece right">▶</button>
+          <button type="button" id="btn-drop" data-action="drop" data-mcp-action="drop" title="Drop piece">Drop ▼</button>
+        </div>
+
+        <div id="well-grid" class="well-grid" role="grid" aria-label="Gravity well grid" data-mcp="well-grid"></div>
+
+        <p class="hint">Click a column to drop · Match 3+ colors to fuse stone · Click stone above Damo to climb</p>
+      </section>
+
+      <aside class="panel panel-right" aria-label="Agentics MCP reference">
+        <section class="stat-block">
+          <h2>For Agentics</h2>
+          <p class="small">This game exposes <code>window.GameAPI</code> for MCP browser tools.</p>
+          <ul class="api-list">
+            <li><code>GameAPI.getState()</code></li>
+            <li><code>GameAPI.act(action)</code></li>
+            <li><code>GameAPI.clickCell(col, row)</code></li>
+          </ul>
+          <p class="small">Actions: <code>move-left</code>, <code>move-right</code>, <code>rotate</code>, <code>drop</code>, <code>stand-up</code>, <code>climb</code>, <code>restart</code></p>
+        </section>
+
+        <section class="stat-block">
+          <h2>How to Play</h2>
+          <ol class="rules">
+            <li>Shift &amp; rotate falling bricks (Tetris).</li>
+            <li>Drop them into the well.</li>
+            <li>Match 3+ same-color bricks in a row or column (Klax) — they fuse into climbable stone.</li>
+            <li>Stand Damo up, then click fused stone above him to climb.</li>
+            <li>Reach the top. Escape the well.</li>
+          </ol>
+        </section>
+      </aside>
+    </main>
+
+    <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+      <div class="overlay-card">
+        <h2 id="overlay-title">Freedom!</h2>
+        <p id="overlay-message">Damo climbed out of the gravity well.</p>
+        <button type="button" id="btn-play-again" data-action="restart" data-mcp-action="restart">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Machine-readable state for MCP browser tools -->
+    <pre id="mcp-game-state" class="sr-only" aria-hidden="true" data-mcp="json-state">{}</pre>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
