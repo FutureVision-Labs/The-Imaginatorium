@@ -11,7 +11,7 @@
   <div id="app" data-game="damo-gravity-well">
     <header class="header">
       <h1>Damo is Trapped in a Gravity Well</h1>
-      <p class="tagline">Tetris meets Klax. Brick by brick. Climb to freedom.</p>
+      <p class="tagline">Nebulus meets Tetris meets Klax. Walk the well. Brick by brick. Climb to freedom.</p>
     </header>
 
     <main class="layout">
@@ -57,16 +57,27 @@
           <div id="next-preview" class="next-preview" data-mcp="next-piece"></div>
         </div>
 
-        <div class="piece-controls" aria-label="Piece controls">
+        <div class="damo-controls" aria-label="Damo movement — Nebulus style">
+          <span class="control-label">Damo</span>
+          <button type="button" id="btn-damo-left" data-action="walk-left" data-mcp-action="walk-left" title="Walk around the well">◀ Walk</button>
+          <button type="button" id="btn-damo-jump" data-action="jump" data-mcp-action="jump" title="Jump up to ledge">Jump ▲</button>
+          <button type="button" id="btn-damo-right" data-action="walk-right" data-mcp-action="walk-right" title="Walk around the well">Walk ▶</button>
+        </div>
+
+        <div class="piece-controls" aria-label="Brick controls">
+          <span class="control-label">Bricks</span>
           <button type="button" id="btn-left" data-action="move-left" data-mcp-action="move-left" title="Shift piece left">◀</button>
           <button type="button" id="btn-rotate" data-action="rotate" data-mcp-action="rotate" title="Rotate piece">↻</button>
           <button type="button" id="btn-right" data-action="move-right" data-mcp-action="move-right" title="Shift piece right">▶</button>
           <button type="button" id="btn-drop" data-action="drop" data-mcp-action="drop" title="Drop piece">Drop ▼</button>
         </div>
 
-        <div id="well-grid" class="well-grid" role="grid" aria-label="Gravity well grid" data-mcp="well-grid"></div>
+        <div class="well-cylinder-viewport" aria-label="Cylindrical gravity well">
+          <div id="well-grid" class="well-cylinder-stage" role="grid" data-mcp="well-grid"></div>
+          <div id="damo-anchor" class="damo-anchor prone" data-mcp="damo-anchor" aria-hidden="true">🛌</div>
+        </div>
 
-        <p class="hint">Click a column to drop · Match 3+ colors to fuse stone · Click stone above Damo to climb</p>
+        <p class="hint">Walk around the well like Nebulus · Drop bricks · Fuse stone ledges · Jump up to climb out</p>
       </section>
 
       <aside class="panel panel-right" aria-label="Agentics MCP reference">
@@ -78,17 +89,17 @@
             <li><code>GameAPI.act(action)</code></li>
             <li><code>GameAPI.clickCell(col, row)</code></li>
           </ul>
-          <p class="small">Actions: <code>move-left</code>, <code>move-right</code>, <code>rotate</code>, <code>drop</code>, <code>stand-up</code>, <code>climb</code>, <code>restart</code>, <code>toggle-sound</code>, <code>toggle-music</code></p>
+          <p class="small">Actions: <code>walk-left</code>, <code>walk-right</code>, <code>jump</code>, <code>move-left</code>, <code>move-right</code>, <code>rotate</code>, <code>drop</code>, <code>stand-up</code>, <code>climb</code></p>
         </section>
 
         <section class="stat-block">
           <h2>How to Play</h2>
           <ol class="rules">
-            <li>Shift &amp; rotate falling bricks (Tetris).</li>
-            <li>Drop them into the well.</li>
-            <li>Match 3+ same-color bricks in a row or column (Klax) — they fuse into climbable stone.</li>
-            <li>Stand Damo up, then click fused stone above him to climb.</li>
-            <li>Reach the top. Escape the well.</li>
+            <li>Stand Damo up, then <strong>walk left/right</strong> around the cylindrical well (Nebulus style).</li>
+            <li>Shift, rotate, and drop bricks into the well shaft.</li>
+            <li>Match 3+ colors (Klax) to fuse climbable stone ledges.</li>
+            <li><strong>Jump</strong> or click stone above to climb to the next ledge.</li>
+            <li>Reach the top. Escape the gravity well.</li>
           </ol>
         </section>
       </aside>
