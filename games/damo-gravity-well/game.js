@@ -32,7 +32,41 @@
     won: false,
     gameOver: false,
     message: 'Damo is lying at the bottom of the well...',
+    dropAnim: null,
+    landPopCells: null,
+    inputLocked: false,
   };
+
+  const CELL_STEP = () => {
+    const size = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--cell-size'), 10) || 42;
+    return size + 2;
+  };
+
+  function easeInQuad(t) {
+    return t * t;
+  }
+
+  function createBlock3d(color, options = {}) {
+    const block = document.createElement('div');
+    block.className = 'block-3d';
+    if (options.ghost) block.classList.add('ghost-block');
+    if (options.active) block.classList.add('active');
+    if (options.falling) block.classList.add('falling');
+    if (options.stone) block.classList.add('stone-block');
+    if (options.landPop) block.classList.add('land-pop');
+
+    if (options.fallOffset) {
+      block.style.transform = `rotateX(-22deg) rotateY(28deg) translateY(${options.fallOffset}px)`;
+    }
+
+    ['top', 'front', 'right', 'shadow'].forEach((face) => {
+      const el = document.createElement('span');
+      el.className = `cube-face cube-${face}`;
+      block.appendChild(el);
+    });
+
+    return block;
+  }
 
   const els = {};
 
@@ -104,9 +138,16 @@
     const piece = state.piece;
     if (!piece) return;
 
-    getPieceCells(piece).forEach(([c, r]) => {
+    const landedCells = getPieceCells(piece);
+    landedCells.forEach(([c, r]) => {
       state.grid[r][c] = { type: 'brick', color: piece.color };
     });
+
+    state.landPopCells = new Set(landedCells.map(([c, r]) => `${c},${r}`));
+    setTimeout(() => {
+      state.landPopCells = null;
+      if (!state.dropAnim) updateUI();
+    }, 320);
 
     state.score += piece.cells.length * 10;
     state.piece = null;
@@ -121,19 +162,55 @@
   }
 
   function dropPiece() {
-    if (!state.piece || state.won || state.gameOver) return false;
+    if (!state.piece || state.won || state.gameOver || state.inputLocked) return false;
 
-    let { col, row } = state.piece;
-    while (canPlacePiece(state.piece, col, row + 1)) {
-      row += 1;
+    const { col, row: startRow } = state.piece;
+    let endRow = startRow;
+    while (canPlacePiece(state.piece, col, endRow + 1)) {
+      endRow += 1;
     }
-    state.piece.row = row;
-    lockPiece();
+
+    if (endRow === startRow) {
+      lockPiece();
+      return true;
+    }
+
+    const distance = endRow - startRow;
+    state.inputLocked = true;
+    state.dropAnim = {
+      startRow,
+      endRow,
+      startTime: performance.now(),
+      duration: Math.min(650, 100 + distance * 55),
+      t: 0,
+    };
+
+    function tickDrop(now) {
+      const anim = state.dropAnim;
+      if (!anim || !state.piece) return;
+
+      anim.t = Math.min(1, (now - anim.startTime) / anim.duration);
+      const eased = easeInQuad(anim.t);
+      anim.fallOffset = eased * distance * CELL_STEP();
+
+      updateUI();
+
+      if (anim.t < 1) {
+        requestAnimationFrame(tickDrop);
+      } else {
+        state.piece.row = anim.endRow;
+        state.dropAnim = null;
+        state.inputLocked = false;
+        lockPiece();
+      }
+    }
+
+    requestAnimationFrame(tickDrop);
     return true;
   }
 
   function movePiece(dx) {
-    if (!state.piece || state.won || state.gameOver) return false;
+    if (!state.piece || state.won || state.gameOver || state.inputLocked) return false;
     const newCol = state.piece.col + dx;
     if (canPlacePiece(state.piece, newCol, state.piece.row)) {
       state.piece.col = newCol;
@@ -146,7 +223,7 @@
   }
 
   function rotatePiece() {
-    if (!state.piece || state.won || state.gameOver) return false;
+    if (!state.piece || state.won || state.gameOver || state.inputLocked) return false;
     const rotated = rotateCells(state.piece.cells);
     const prev = state.piece.cells;
     state.piece.cells = rotated;
@@ -273,8 +350,14 @@
 
   function buildGrid() {
     els.wellGrid.innerHTML = '';
-    const ghost = getGhostLanding();
+    const ghost = state.dropAnim ? null : getGhostLanding();
     const ghostSet = new Set((ghost || []).map(([c, r]) => `${c},${r}`));
+    const activeCells = state.piece && !state.dropAnim
+      ? new Set(getPieceCells(state.piece).map(([c, r]) => `${c},${r}`))
+      : state.piece && state.dropAnim
+        ? new Set(getPieceCells(state.piece).map(([c, r]) => `${c},${r}`))
+        : new Set();
+    const fallOffset = state.dropAnim ? state.dropAnim.fallOffset || 0 : 0;
 
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
@@ -287,10 +370,21 @@
 
         if (r === EXIT_ROW) cell.classList.add('exit-row');
 
+        const key = `${c},${r}`;
         const data = state.grid[r][c];
-        if (data) {
+        const isActive = activeCells.has(key);
+
+        if (data && !isActive) {
           cell.classList.add(data.type);
           if (data.type === 'brick') cell.classList.add(`color-${data.color}`);
+          if (data.type === 'stone') cell.classList.add('color-stone');
+
+          const landPop = state.landPopCells && state.landPopCells.has(key);
+          cell.appendChild(createBlock3d(data.color, {
+            stone: data.type === 'stone',
+            landPop,
+          }));
+
           if (data.type === 'stone' && isClimbableTarget(c, r)) {
             cell.classList.add('climbable');
             cell.dataset.action = 'climb';
@@ -298,16 +392,21 @@
           }
         }
 
-        if (ghostSet.has(`${c},${r}`) && !data) {
+        if (ghostSet.has(key) && !data && !isActive) {
           cell.classList.add('ghost');
-          if (state.piece) cell.classList.add(`color-${state.piece.color}`);
+          if (state.piece) {
+            cell.classList.add(`color-${state.piece.color}`);
+            cell.appendChild(createBlock3d(state.piece.color, { ghost: true }));
+          }
         }
 
-        if (state.piece) {
-          const active = getPieceCells(state.piece);
-          if (active.some(([pc, pr]) => pc === c && pr === r)) {
-            cell.classList.add('brick', `color-${state.piece.color}`);
-          }
+        if (isActive && state.piece) {
+          cell.classList.add('brick', `color-${state.piece.color}`);
+          cell.appendChild(createBlock3d(state.piece.color, {
+            active: !state.dropAnim,
+            falling: Boolean(state.dropAnim),
+            fallOffset: state.dropAnim ? fallOffset : 0,
+          }));
         }
 
         if (damoAt(c, r)) {
@@ -323,6 +422,11 @@
         els.wellGrid.appendChild(cell);
       }
     }
+
+    const lockControls = state.inputLocked || state.won || state.gameOver;
+    [els.btnLeft, els.btnRight, els.btnRotate, els.btnDrop].forEach((btn) => {
+      if (btn) btn.disabled = lockControls;
+    });
   }
 
   function renderPreview() {
@@ -335,17 +439,22 @@
 
     for (let y = 0; y <= maxY; y++) {
       for (let x = 0; x <= maxX; x++) {
-        const div = document.createElement('div');
+        const slot = document.createElement('div');
+        slot.style.width = '18px';
+        slot.style.height = '18px';
         const filled = state.piece.cells.some(([px, py]) => px === x && py === y);
-        div.style.width = '18px';
-        div.style.height = '18px';
-        div.style.borderRadius = '3px';
         if (filled) {
-          div.className = `color-${state.piece.color}`;
-        } else {
-          div.style.background = 'transparent';
+          slot.className = `color-${state.piece.color}`;
+          const cube = document.createElement('div');
+          cube.className = 'preview-cube';
+          ['top', 'front', 'right'].forEach((face) => {
+            const el = document.createElement('span');
+            el.className = `cube-face cube-${face}`;
+            cube.appendChild(el);
+          });
+          slot.appendChild(cube);
         }
-        els.nextPreview.appendChild(div);
+        els.nextPreview.appendChild(slot);
       }
     }
   }
@@ -429,7 +538,7 @@
   }
 
   function onCellClick(col, row) {
-    if (state.won) return;
+    if (state.won || state.inputLocked) return;
     Music.unlock();
     Sfx.unlock();
     if (isClimbableTarget(col, row)) {
@@ -457,6 +566,9 @@
     state.stoneCount = 0;
     state.won = false;
     state.gameOver = false;
+    state.dropAnim = null;
+    state.landPopCells = null;
+    state.inputLocked = false;
     state.message = 'Damo is lying at the bottom of the well. Stand him up. Build stone. Climb.';
     hideOverlay();
     Sfx.play('restart');
