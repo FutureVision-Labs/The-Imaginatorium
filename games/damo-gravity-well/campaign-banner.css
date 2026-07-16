@@ -1,0 +1,50 @@
+.fundraiser-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin: 0.5rem 1rem 0;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #e8f4ff;
+  background: linear-gradient(90deg, rgba(30, 77, 140, 0.55), rgba(0, 169, 165, 0.35));
+  border: 1px solid rgba(0, 169, 165, 0.45);
+  box-shadow: 0 0 20px rgba(0, 169, 165, 0.12);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.fundraiser-banner:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  color: #fff;
+}
+
+.fundraiser-banner-text {
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.fundraiser-banner-text strong {
+  color: #9ff7f4;
+}
+
+.fundraiser-banner-cta {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fee440;
+}
+
+@media (max-width: 480px) {
+  .fundraiser-banner {
+    margin: 0.35rem 0.5rem 0;
+    padding: 0.5rem 0.65rem;
+  }
+
+  .fundraiser-banner-text {
+    font-size: 0.75rem;
+  }
+}
