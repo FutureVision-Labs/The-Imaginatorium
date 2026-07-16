@@ -98,6 +98,24 @@ body {
   color: var(--text);
 }
 
+.now-playing {
+  font-size: 0.82rem !important;
+  color: var(--accent-3) !important;
+  margin-bottom: 0.5rem;
+  line-height: 1.35 !important;
+}
+
+#btn-music {
+  width: 100%;
+  background: linear-gradient(135deg, #ff2d95, #ff6bcb);
+  color: #fff;
+}
+
+#btn-music[aria-pressed="true"] {
+  background: linear-gradient(135deg, #555, #777);
+  color: #ddd;
+}
+
 .small {
   font-size: 0.78rem !important;
   color: var(--muted) !important;

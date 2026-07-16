@@ -37,6 +37,12 @@
           <p id="damo-state" data-mcp="damo-state">Prone — stand up first!</p>
         </section>
 
+        <section class="stat-block">
+          <h2>Soundtrack</h2>
+          <p id="now-playing" class="now-playing" data-mcp="now-playing">♪ Penthouse in the Clouds EP — tap to play</p>
+          <button type="button" id="btn-music" data-action="toggle-music" data-mcp-action="toggle-music" aria-pressed="false" title="Toggle music">🎵 Music On</button>
+        </section>
+
         <section class="stat-block controls" aria-label="Damo actions">
           <h2>Actions</h2>
           <button type="button" id="btn-stand" data-action="stand-up" data-mcp-action="stand-up" disabled>Stand Up</button>
@@ -72,7 +78,7 @@
             <li><code>GameAPI.act(action)</code></li>
             <li><code>GameAPI.clickCell(col, row)</code></li>
           </ul>
-          <p class="small">Actions: <code>move-left</code>, <code>move-right</code>, <code>rotate</code>, <code>drop</code>, <code>stand-up</code>, <code>climb</code>, <code>restart</code>, <code>toggle-sound</code></p>
+          <p class="small">Actions: <code>move-left</code>, <code>move-right</code>, <code>rotate</code>, <code>drop</code>, <code>stand-up</code>, <code>climb</code>, <code>restart</code>, <code>toggle-sound</code>, <code>toggle-music</code></p>
         </section>
 
         <section class="stat-block">
@@ -101,6 +107,7 @@
   </div>
 
   <script src="audio.js"></script>
+  <script src="music.js"></script>
   <script src="game.js"></script>
 </body>
 </html>

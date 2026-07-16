@@ -247,6 +247,7 @@
       state.won = true;
       state.message = 'Damo escaped the gravity well! Freedom at last.';
       Sfx.play('win');
+      Music.playFinale();
       showOverlay('Freedom!', `Score: ${state.score}. Damo climbed out brick by brick.`);
     }
 
@@ -401,6 +402,8 @@
         stones: state.stoneCount,
       },
       soundEnabled: Sfx.isEnabled(),
+      musicEnabled: Music.isEnabled(),
+      nowPlaying: Music.getCurrentTrack(),
     };
 
     els.mcpState.textContent = JSON.stringify(payload, null, 2);
@@ -427,6 +430,8 @@
 
   function onCellClick(col, row) {
     if (state.won) return;
+    Music.unlock();
+    Sfx.unlock();
     if (isClimbableTarget(col, row)) {
       climbTo(col, row);
       return;
@@ -455,6 +460,7 @@
     state.message = 'Damo is lying at the bottom of the well. Stand him up. Build stone. Climb.';
     hideOverlay();
     Sfx.play('restart');
+    if (Music.isEnabled()) Music.start();
     spawnPiece();
     updateUI();
   }
@@ -479,6 +485,8 @@
         return true;
       case 'toggle-sound':
         return toggleSound();
+      case 'toggle-music':
+        return toggleMusic();
       default:
         return false;
     }
@@ -495,8 +503,28 @@
     clickCell,
     restart,
     toggleSound,
+    toggleMusic,
     _state: {},
   };
+
+  function toggleMusic() {
+    const on = Music.toggle();
+    updateMusicButton();
+    publishMcpState();
+    return on;
+  }
+
+  function updateMusicButton() {
+    if (!els.btnMusic) return;
+    const on = Music.isEnabled();
+    els.btnMusic.textContent = on ? '🎵 Music On' : '🔇 Music Off';
+    els.btnMusic.setAttribute('aria-pressed', on ? 'false' : 'true');
+  }
+
+  function updateNowPlaying(track) {
+    if (!els.nowPlaying || !track) return;
+    els.nowPlaying.textContent = `♪ ${track.num}. ${track.title} — ${track.genre}`;
+  }
 
   function toggleSound() {
     const on = Sfx.toggle();
@@ -518,6 +546,7 @@
     els.btnDrop.addEventListener('click', () => dropPiece());
     els.btnStand.addEventListener('click', () => standUp());
     els.btnMute.addEventListener('click', () => toggleSound());
+    els.btnMusic.addEventListener('click', () => toggleMusic());
     els.btnRestart.addEventListener('click', () => restart());
     els.btnPlayAgain.addEventListener('click', () => restart());
 
@@ -548,12 +577,16 @@
     els.btnDrop = document.getElementById('btn-drop');
     els.btnStand = document.getElementById('btn-stand');
     els.btnMute = document.getElementById('btn-mute');
+    els.btnMusic = document.getElementById('btn-music');
+    els.nowPlaying = document.getElementById('now-playing');
     els.btnRestart = document.getElementById('btn-restart');
     els.btnPlayAgain = document.getElementById('btn-play-again');
 
     bindEvents();
     Sfx.setRows(ROWS);
+    Music.setOnTrackChange(updateNowPlaying);
     updateMuteButton();
+    updateMusicButton();
     restart();
   }
 
