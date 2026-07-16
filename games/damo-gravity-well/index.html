@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Damo is Trapped in a Gravity Well</title>
+  <meta name="description" content="Nebulus-style climb game from a mental health ward. Tetris + Klax. Fundraiser for Black Dog Institute. Play free.">
+  <meta property="og:title" content="Damo is Trapped in a Gravity Well — Play & Donate">
+  <meta property="og:description" content="Built at 3am from hospital. Walk the well. Stack bricks. Climb out. Proudly supporting Black Dog Institute.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="campaign-banner.css">
+</head>
+<body>
+  <div id="app" data-game="damo-gravity-well">
+    <a class="fundraiser-banner" href="campaign.html" data-mcp="fundraiser-banner">
+      <span class="fundraiser-banner-icon" aria-hidden="true">🖤</span>
+      <span class="fundraiser-banner-text">
+        <strong>Proudly supporting Black Dog Institute</strong> — Play · Share · Donate
+      </span>
+      <span class="fundraiser-banner-cta">Campaign →</span>
+    </a>
+
+    <header class="header">
+      <h1>Damo is Trapped in a Gravity Well</h1>
+      <p class="tagline">Nebulus meets Tetris meets Klax. Walk the well. Brick by brick. Climb to freedom.</p>
+    </header>
+
+    <main class="layout">
+      <aside class="panel panel-left" aria-label="Game status">
+        <section class="stat-block">
+          <h2>Status</h2>
+          <p id="status-text" aria-live="polite" data-mcp="status">Damo is lying at the bottom of the well...</p>
+        </section>
+
+        <section class="stat-block">
+          <h2>Progress</h2>
+          <div class="progress-bar" aria-hidden="true">
+            <div id="climb-progress" class="progress-fill"></div>
+          </div>
+          <p><span id="height-label">Depth</span>: <strong id="height-value" data-mcp="depth">15</strong> bricks to freedom</p>
+          <p>Score: <strong id="score-value" data-mcp="score">0</strong></p>
+          <p>Fused stone: <strong id="stone-value" data-mcp="stone-count">0</strong></p>
+        </section>
+
+        <section class="stat-block">
+          <h2>Damo</h2>
+          <div id="damo-portrait" class="damo-portrait prone" data-mcp="damo-pose">🛌</div>
+          <p id="damo-state" data-mcp="damo-state">Prone — stand up first!</p>
+        </section>
+
+        <section class="stat-block">
+          <h2>Soundtrack</h2>
+          <p id="now-playing" class="now-playing" data-mcp="now-playing">♪ Penthouse in the Clouds EP — tap to play</p>
+          <button type="button" id="btn-music" data-action="toggle-music" data-mcp-action="toggle-music" aria-pressed="false" title="Toggle music">🎵 Music On</button>
+        </section>
+
+        <section class="stat-block controls" aria-label="Damo actions">
+          <h2>Actions</h2>
+          <button type="button" id="btn-stand" data-action="stand-up" data-mcp-action="stand-up" disabled>Stand Up</button>
+          <button type="button" id="btn-mute" data-action="toggle-sound" data-mcp-action="toggle-sound" aria-pressed="false" title="Toggle sound">🔊 Sound On</button>
+          <button type="button" id="btn-restart" data-action="restart" data-mcp-action="restart">Restart</button>
+        </section>
+      </aside>
+
+      <section class="well-wrap" aria-label="Gravity well playfield">
+        <div class="conveyor" aria-label="Incoming bricks">
+          <span class="conveyor-label">Incoming</span>
+          <div id="next-preview" class="next-preview" data-mcp="next-piece"></div>
+        </div>
+
+        <div class="damo-controls" aria-label="Damo movement — Nebulus style">
+          <span class="control-label">Damo</span>
+          <button type="button" id="btn-damo-left" data-action="walk-left" data-mcp-action="walk-left" title="Walk around the well">◀ Walk</button>
+          <button type="button" id="btn-damo-jump" data-action="jump" data-mcp-action="jump" title="Jump up to ledge">Jump ▲</button>
+          <button type="button" id="btn-damo-right" data-action="walk-right" data-mcp-action="walk-right" title="Walk around the well">Walk ▶</button>
+        </div>
+
+        <div class="piece-controls" aria-label="Brick controls">
+          <span class="control-label">Bricks</span>
+          <button type="button" id="btn-left" data-action="move-left" data-mcp-action="move-left" title="Shift piece left">◀</button>
+          <button type="button" id="btn-rotate" data-action="rotate" data-mcp-action="rotate" title="Rotate piece">↻</button>
+          <button type="button" id="btn-right" data-action="move-right" data-mcp-action="move-right" title="Shift piece right">▶</button>
+          <button type="button" id="btn-drop" data-action="drop" data-mcp-action="drop" title="Drop piece">Drop ▼</button>
+        </div>
+
+        <div class="well-flat-viewport" aria-label="Gravity well — walk around the shaft">
+          <div id="well-grid" class="well-flat-stage" role="grid" data-mcp="well-grid"></div>
+        </div>
+
+        <p class="hint">1) Stand Up · 2) ◀ Walk ▶ to circle the well · 3) Drop bricks · 4) Jump ▲ to climb</p>
+      </section>
+
+      <aside class="panel panel-right" aria-label="Agentics MCP reference">
+        <section class="stat-block">
+          <h2>For Agentics</h2>
+          <p class="small">This game exposes <code>window.GameAPI</code> for MCP browser tools.</p>
+          <ul class="api-list">
+            <li><code>GameAPI.getState()</code></li>
+            <li><code>GameAPI.act(action)</code></li>
+            <li><code>GameAPI.clickCell(col, row)</code></li>
+          </ul>
+          <p class="small">Actions: <code>walk-left</code>, <code>walk-right</code>, <code>jump</code>, <code>move-left</code>, <code>move-right</code>, <code>rotate</code>, <code>drop</code>, <code>stand-up</code>, <code>climb</code></p>
+        </section>
+
+        <section class="stat-block">
+          <h2>How to Play</h2>
+          <ol class="rules">
+            <li>Stand Damo up, then <strong>walk left/right</strong> around the cylindrical well (Nebulus style).</li>
+            <li>Shift, rotate, and drop bricks into the well shaft.</li>
+            <li>Match 3+ colors (Klax) to fuse climbable stone ledges.</li>
+            <li><strong>Jump</strong> or click stone above to climb to the next ledge.</li>
+            <li>Reach the top. Escape the gravity well.</li>
+          </ol>
+        </section>
+      </aside>
+    </main>
+
+    <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+      <div class="overlay-card">
+        <h2 id="overlay-title">Freedom!</h2>
+        <p id="overlay-message">Damo climbed out of the gravity well.</p>
+        <button type="button" id="btn-play-again" data-action="restart" data-mcp-action="restart">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Machine-readable state for MCP browser tools -->
+    <pre id="mcp-game-state" class="sr-only" aria-hidden="true" data-mcp="json-state">{}</pre>
+  </div>
+
+  <script src="audio.js"></script>
+  <script src="music.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

@@ -629,6 +629,45 @@ body {
     color: var(--primary-purple);
 }
 
+.hero-fundraiser {
+    display: block;
+    margin-top: 1.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--light-text);
+    background: linear-gradient(135deg, rgba(30, 77, 140, 0.45), rgba(20, 184, 166, 0.25));
+    border: 1px solid rgba(20, 184, 166, 0.45);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-fundraiser:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(20, 184, 166, 0.2);
+}
+
+.hero-fundraiser strong {
+    display: block;
+    font-size: 1.15rem;
+    margin: 0.25rem 0;
+    color: #9ff7f4;
+}
+
+.hero-fundraiser span:not(.hero-fundraiser-tag) {
+    font-size: 0.88rem;
+    color: var(--muted-text);
+}
+
+.hero-fundraiser-tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--primary-gold);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero-title {
