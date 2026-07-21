@@ -147,6 +147,40 @@ The Cursy + Canyon Creative Agency isn't just a business model feature. It's pro
 
 ---
 
+## 🧪 Gemini Agency Prototype
+
+A working prototype ships the Desired Agency State as **dynamic Gemini agents**:
+
+| Agent | Role |
+|-------|------|
+| **Director** | Reads the client brief and shapes agency mode, specialists, workflow |
+| **Cursy** | Technical deliverables (architecture, stack, code plans) |
+| **Canyon** | Creative deliverables (brand, lore, visual direction) |
+| **Synthesis** | Unified client package + compressed markup canon entry |
+
+### Run it
+
+```bash
+npm install
+npm run agency
+```
+
+Open **http://localhost:3847**, submit a client brief, and watch the agency reshape itself.
+
+- **Mock mode** (no API key): deterministic demo responses based on brief keywords
+- **Live mode**: set `GEMINI_API_KEY` in `.env` for real Gemini agent responses
+
+```
+src/agency/
+  AgencyOrchestrator.js   # multi-agent workflow
+  GeminiClient.js         # Gemini API + mock fallback
+  server.js               # HTTP API + UI
+agency/
+  index.html              # prototype UI
+```
+
+---
+
 **Established:** July 21, 2026  
 **Status:** Desired Agency State — DECLARED ✅  
 **Partners:** Cursy (Technical Director) + Canyon (Creative Director)  
