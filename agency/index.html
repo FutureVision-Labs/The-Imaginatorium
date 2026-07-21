@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursy + Canyon Creative Agency — Prototype</title>
+  <link rel="stylesheet" href="agency.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="header">
+    <div class="brand">
+      <span class="brand-icon">🎨</span>
+      <div>
+        <h1>Cursy + Canyon Creative Agency</h1>
+        <p class="motto">The agency that you want us to be — and that's what we are.</p>
+      </div>
+    </div>
+    <div class="status-pill" id="status-pill">
+      <span class="dot"></span>
+      <span id="status-text">Connecting…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel intake-panel">
+      <h2>Client Brief</h2>
+      <p class="hint">Describe what you need. The Director agent shapes the agency dynamically; Cursy and Canyon deliver via Gemini.</p>
+
+      <textarea id="brief" rows="8" placeholder="Example: Build a landing page and brand identity for a fantasy cooking podcast called Kitchen Realms. Needs lore, warm visuals, and a simple signup flow."></textarea>
+
+      <div class="sample-briefs">
+        <span>Try:</span>
+        <button type="button" class="chip" data-brief="Design a badge pack and lore bible for a voxel RPG guild called Starforge Collective.">Lore Lab</button>
+        <button type="button" class="chip" data-brief="Prototype a Phaser mini-game with agency branding for an AI creative studio launch.">Game Forge</button>
+        <button type="button" class="chip" data-brief="Full agency package: SaaS dashboard UI, technical architecture, and brand system for a project management tool.">Full Agency</button>
+      </div>
+
+      <button id="run-btn" class="primary-btn">Activate Desired Agency State</button>
+    </section>
+
+    <section class="panel output-panel">
+      <h2>Agency Run</h2>
+      <div id="empty-state" class="empty-state">
+        <div class="empty-icon">✦</div>
+        <p>Submit a brief to watch the agency reshape itself in real time.</p>
+      </div>
+
+      <div id="run-output" class="run-output hidden">
+        <div id="shape-card" class="card shape-card"></div>
+
+        <div class="agent-grid">
+          <div id="cursy-card" class="card agent-card cursy-card hidden"></div>
+          <div id="canyon-card" class="card agent-card canyon-card hidden"></div>
+        </div>
+
+        <div id="package-card" class="card package-card hidden"></div>
+
+        <details class="phases-details">
+          <summary>Agent phase log</summary>
+          <ol id="phase-log"></ol>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Prototype · The Imaginatorium · Team DC</span>
+    <a href="/docs">Agency docs</a>
+  </footer>
+
+  <script src="agency.js"></script>
+</body>
+</html>

@@ -164,7 +164,7 @@ A cozy voxel-based shared house where AI friends live together:
   - Gwendy: Dungeon Master / Mystic
 - **Business Ownership** - Characters can own and run businesses
   - Bars, restaurants, bakeries
-  - Creative agencies (Cursy + Canyon!)
+  - Creative agencies (Cursy + Canyon! — *"The agency that you want us to be — and that's what we are."*)
   - Mystical shops, tech companies
 - **Revenue-Generating Content** - Characters create REAL, monetizable content!
   - **Ebooks** - Characters write and publish books
@@ -223,6 +223,7 @@ A cozy voxel-based shared house where AI friends live together:
 - **[ASSETS_RESEARCH.md](ASSETS_RESEARCH.md)** - Free voxel asset packs research
 - **[CANVA_LOGO_PROMPT.md](CANVA_LOGO_PROMPT.md)** - Canva AI Logo Generator prompt for The Imaginatorium voxel logo
 - **[BUSINESS_MODEL.md](BUSINESS_MODEL.md)** - Business Model & Scaling: Premium subscription model, AWS infrastructure, cost analysis
+- **[CREATIVE_AGENCY.md](CREATIVE_AGENCY.md)** - Cursy + Canyon Creative Agency: *"The agency that you want us to be — and that's what we are."*
 
 ---
 
