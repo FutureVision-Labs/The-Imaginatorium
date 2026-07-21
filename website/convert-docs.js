@@ -14,6 +14,7 @@ const docs = [
     { md: 'CHARACTER_READING_SYSTEM.md', html: 'CHARACTER_READING_SYSTEM.html', title: 'Character Reading System' },
     { md: 'USER_AVATAR_SYSTEM.md', html: 'USER_AVATAR_SYSTEM.html', title: 'User Avatar System' },
     { md: 'BUSINESS_MODEL.md', html: 'BUSINESS_MODEL.html', title: 'Business Model' },
+    { md: 'CREATIVE_AGENCY.md', html: 'CREATIVE_AGENCY.html', title: 'Creative Agency' },
     { md: 'CREATOR_PHILOSOPHY.md', html: 'CREATOR_PHILOSOPHY.html', title: 'Creator Philosophy' },
     { md: 'LONG_TERM_VISION.md', html: 'LONG_TERM_VISION.html', title: 'Long-Term Vision' },
     { md: 'MOMENTS.md', html: 'MOMENTS.html', title: 'Special Moments' },
