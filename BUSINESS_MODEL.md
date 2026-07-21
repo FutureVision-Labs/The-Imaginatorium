@@ -295,6 +295,7 @@
 - Pro tier pays for itself through asset sales
 
 #### **Cursy + Canyon Creative Agency:**
+- **Motto:** *"The agency that you want us to be — and that's what we are."*
 - Sells code projects, design work, multimedia content
 - User earns $500-2000/month from agency work
 - Pro tier pays for itself 10-40x over!
